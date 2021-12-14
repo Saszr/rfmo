@@ -7,13 +7,9 @@ export default defineConfig({
   plugins: [react()],
   base: './',
   resolve: {
-    // alias: [
-    //   { find: /^~/, replacement: '' },
-    //   { find: '@', replacement: path.resolve(__dirname, './src') },
-    // ],
-    // alias: {
-    //   '@': path.resolve(__dirname, './src'),
-    // },
+    alias: {
+      '@/': path.resolve(__dirname, './src'),
+    },
   },
   css: {
     preprocessorOptions: {
