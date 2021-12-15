@@ -1,8 +1,10 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
     "target": "ESNext",
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "types": ["vite/client"],
     "allowJs": false,
     "skipLibCheck": false,
     "esModuleInterop": false,
@@ -15,9 +17,17 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react",
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules",
+        "options": {
+          "customMatcher": ".(styl|css|scss|less|sass)$"
+        }
+      }
+    ],
     "paths": {
       "@/*": ["./src/*"]
     }
   },
-  "include": ["./src"]
+  "include": ["./src", "vite.config.ts"]
 }
