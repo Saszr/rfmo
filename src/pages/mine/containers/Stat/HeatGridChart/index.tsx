@@ -27,6 +27,7 @@ interface HeatGridStatProps {
 
 const HeatGridChart = () => {
   const [heatGridDayArr, setHeatGridDayArr] = React.useState<string[][]>([]);
+  const [heatGridMonthArr, setHeatGridMonthArr] = React.useState<string[]>([]);
   const [heatGridStat, setHeatGridStat] = React.useState<HeatGridStatProps>({
     daily_memo_count: {},
   });
@@ -44,13 +45,24 @@ const HeatGridChart = () => {
       }
       totalDayArr.push(dayArr);
     }
-
     totalDayArr.reverse();
     const curHeatGridDayArr = totalDayArr.map((week) => {
       return week.reverse();
     });
-
     setHeatGridDayArr(curHeatGridDayArr);
+
+    const curHeatGridMonthArr = curHeatGridDayArr
+      .map((week) => {
+        return [...week].pop();
+      })
+      .map((date) => {
+        return dayjs(date).format('MMM');
+      })
+      .reduce((acc: string[], cur) => {
+        if (acc.includes(cur)) return [...acc, ''];
+        return [...acc, cur];
+      }, []);
+    setHeatGridMonthArr(curHeatGridMonthArr);
   }, []);
 
   React.useEffect(() => {
@@ -60,55 +72,67 @@ const HeatGridChart = () => {
   }, []);
 
   return (
-    <div className={classNames(Styles.heatGrid)}>
-      {heatGridDayArr.map((week, x) => {
-        return (
-          // eslint-disable-next-line react/no-array-index-key
-          <div key={x} className={classNames(Styles.week)}>
-            {week.map((day, y) => {
-              const today = day === dayjs().format('YYYY/MM/DD') ? Styles.today : '';
+    <>
+      <div className={Styles.heatGrid}>
+        {heatGridDayArr.map((week, x) => {
+          return (
+            // eslint-disable-next-line react/no-array-index-key
+            <div key={x} className={Styles.week}>
+              {week.map((day, y) => {
+                const today = day === dayjs().format('YYYY/MM/DD') ? Styles.today : '';
 
-              let curMemoCount = 0;
-              const { daily_memo_count } = heatGridStat;
-              if (Object.keys(daily_memo_count).includes(day)) {
-                curMemoCount = daily_memo_count[day];
-              }
+                let curMemoCount = 0;
+                const { daily_memo_count } = heatGridStat;
+                if (Object.keys(daily_memo_count).includes(day)) {
+                  curMemoCount = daily_memo_count[day];
+                }
 
-              const memoDepth =
-                curMemoCount > 0 && curMemoCount < 5
-                  ? Styles.lightGreen
-                  : curMemoCount >= 5 && curMemoCount < 10
-                  ? Styles.green
-                  : curMemoCount >= 10
-                  ? Styles.darkGreen
-                  : '';
+                const memoDepth =
+                  curMemoCount > 0 && curMemoCount < 5
+                    ? Styles.lightGreen
+                    : curMemoCount >= 5 && curMemoCount < 10
+                    ? Styles.green
+                    : curMemoCount >= 10
+                    ? Styles.darkGreen
+                    : '';
 
-              const tooltip = (
-                <Tooltip>
-                  <p className={'py-1'}>
-                    {curMemoCount} memo on {day}
-                  </p>
-                </Tooltip>
-              );
+                const tooltip = (
+                  <Tooltip>
+                    <p className={'py-1'}>
+                      {curMemoCount} memo on {day}
+                    </p>
+                  </Tooltip>
+                );
 
-              return (
-                <Whisper
-                  // eslint-disable-next-line react/no-array-index-key
-                  key={y}
-                  placement="top"
-                  controlId="control-id-hover"
-                  trigger="hover"
-                  speaker={tooltip}
-                  delay={300}
-                >
-                  <div className={classNames(Styles.day, today, memoDepth)} />
-                </Whisper>
-              );
-            })}
-          </div>
-        );
-      })}
-    </div>
+                return (
+                  <Whisper
+                    // eslint-disable-next-line react/no-array-index-key
+                    key={y}
+                    placement="top"
+                    controlId="control-id-hover"
+                    trigger="hover"
+                    speaker={tooltip}
+                    delay={300}
+                  >
+                    <div className={classNames(Styles.day, today, memoDepth)} />
+                  </Whisper>
+                );
+              })}
+            </div>
+          );
+        })}
+      </div>
+      <div className={classNames(Styles.heatGrid, Styles.monthBox)}>
+        {heatGridMonthArr.map((month, z) => {
+          return (
+            // eslint-disable-next-line react/no-array-index-key
+            <div key={z} className={Styles.month}>
+              {month}
+            </div>
+          );
+        })}
+      </div>
+    </>
   );
 };
 
