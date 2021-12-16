@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Stat from '@/pages/mine/containers/Stat';
-import Sidebar from '@/pages/mine/containers/Sidebar';
+import Stat from '@/pages/mine/components/Stat';
+import Sidebar from '@/pages/mine/components/Sidebar';
+import Main from './main';
 
 const Wrapper = styled.section`
   display: flex;
@@ -43,7 +44,9 @@ const Mine = () => {
         <Stat />
         <Sidebar />
       </WrapperAside>
-      <WrapperMain />
+      <WrapperMain>
+        <Main />
+      </WrapperMain>
     </Wrapper>
   );
 };

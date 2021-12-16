@@ -1,6 +1,7 @@
 import React from 'react';
-import { useNavigate, createSearchParams, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { Message, EventDetail, Random } from '@rsuite/icons';
+import { useNavigateSearch } from '@/hooks/useRouterDom';
 
 import Styles from './Sidebar.module.less';
 
@@ -21,12 +22,6 @@ const menu = [
     icon: <Random style={{ marginBottom: '3px' }} />,
   },
 ];
-
-const useNavigateSearch = () => {
-  const navigate = useNavigate();
-  return (pathname: string, params: Record<string, any>) =>
-    navigate(`${pathname}?${createSearchParams(params)}`);
-};
 
 const Sidebar = () => {
   const navigateSearch = useNavigateSearch();
