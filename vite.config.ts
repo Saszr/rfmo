@@ -15,6 +15,7 @@ export default defineConfig({
     preprocessorOptions: {
       less: {
         javascriptEnabled: true,
+        modifyVars: { '@enable-css-reset': false }
       },
     },
   },
