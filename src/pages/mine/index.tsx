@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import HeatGridChart from '@/pages/mine/components/HeatGridChart';
+import Stat from '@/pages/mine/containers/Stat';
+import Sidebar from '@/pages/mine/containers/Sidebar';
 
 const Wrapper = styled.section`
   display: flex;
@@ -37,11 +38,12 @@ const WrapperMain = styled.main`
 const Mine = () => {
   return (
     <Wrapper>
-      <WrapperAside>
+      <WrapperAside style={{ width: '240px' }}>
         <h3>Sheng</h3>
-        <HeatGridChart />
+        <Stat />
+        <Sidebar />
       </WrapperAside>
-      <WrapperMain>main</WrapperMain>
+      <WrapperMain />
     </Wrapper>
   );
 };

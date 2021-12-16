@@ -1,6 +1,7 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@rsuite/icons': ^1.0.2
   '@types/node': ^16.11.12
   '@types/react': ^17.0.33
   '@types/react-dom': ^17.0.10
@@ -27,6 +28,7 @@ specifiers:
   vite: ^2.7.2
 
 dependencies:
+  '@rsuite/icons': 1.0.2_react-dom@17.0.2+react@17.0.2
   ahooks: 3.0.3_react@17.0.2
   classnames: 2.3.1
   dayjs: 1.10.7
