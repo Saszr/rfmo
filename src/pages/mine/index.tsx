@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Stat from '@/pages/mine/components/Stat';
-import Sidebar from '@/pages/mine/components/Sidebar';
+import WrapperAside from '@/pages/mine/containers/WrapperAside';
 import Main from './main';
 
 const Wrapper = styled.section`
@@ -16,13 +15,6 @@ const Wrapper = styled.section`
   height: 100%;
   margin: 0 auto;
   width: min-content;
-`;
-
-const WrapperAside = styled.aside`
-  overflow: auto;
-  box-sizing: border-box;
-  flex-shrink: 0;
-  width: 240px;
 `;
 
 const WrapperMain = styled.main`
@@ -39,11 +31,7 @@ const WrapperMain = styled.main`
 const Mine = () => {
   return (
     <Wrapper>
-      <WrapperAside style={{ width: '240px' }}>
-        <h3>Sheng</h3>
-        <Stat />
-        <Sidebar />
-      </WrapperAside>
+      <WrapperAside />
       <WrapperMain>
         <Main />
       </WrapperMain>

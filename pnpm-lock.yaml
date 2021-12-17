@@ -21,6 +21,7 @@ specifiers:
   react: ^17.0.2
   react-dom: ^17.0.2
   react-router-dom: ^6.1.1
+  react-spring: ^9.3.2
   rsuite: ^5.3.0
   styled-components: ^5.3.3
   tailwindcss: ^3.0.2
@@ -38,6 +39,7 @@ dependencies:
   react: registry.npmmirror.com/react/17.0.2
   react-dom: registry.npmmirror.com/react-dom/17.0.2_react@17.0.2
   react-router-dom: 6.1.1_react-dom@17.0.2+react@17.0.2
+  react-spring: 9.3.2_react-dom@17.0.2+react@17.0.2
   rsuite: 5.3.0_react-dom@17.0.2+react@17.0.2
   styled-components: 5.3.3_react-dom@17.0.2+react@17.0.2
 
@@ -1411,6 +1413,116 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.13.0
     dev: true
+
+  /@react-spring/animated/9.3.1_react@17.0.2:
+    resolution: {integrity: sha512-23YaERZ++BwZ8F8PxPFqrpOwp/JZun1Pj6aHZtPAU42j5LycBRasT9XMw7Eyr7zNFhT+rl3R3wFfd4WX6Ax+UA==}
+    peerDependencies:
+      react: ^16.8.0  || ^17.0.0
+    dependencies:
+      '@react-spring/shared': 9.3.1_react@17.0.2
+      '@react-spring/types': 9.3.1
+      react: registry.npmmirror.com/react/17.0.2
+    dev: false
+
+  /@react-spring/core/9.3.1_react@17.0.2:
+    resolution: {integrity: sha512-8rmfmEHLHGtF1CUiXRn64YJqsXNxv2cGX8oNnBnsuoE33c48Zc34t2VIMB4R9q5zwIUCvDBGfiEenA8ZAPxqOQ==}
+    peerDependencies:
+      react: ^16.8.0  || ^17.0.0
+    dependencies:
+      '@react-spring/animated': 9.3.1_react@17.0.2
+      '@react-spring/shared': 9.3.1_react@17.0.2
+      '@react-spring/types': 9.3.1
+      react: registry.npmmirror.com/react/17.0.2
+    dev: false
+
+  /@react-spring/konva/9.3.1_react@17.0.2:
+    resolution: {integrity: sha512-woG2DeDcUlz5hB8g9pA/tyUWU6dMrAzyUsNiBWVCyI9UqKA7CUKjz+ODOUi+hS++3Kz7kZSr3u0zzHHfxvoTPQ==}
+    peerDependencies:
+      konva: '>=2.6'
+      react: ^16.8.0  || ^17.0.0
+      react-konva: ^16.8.0  || ^17.0.0
+    dependencies:
+      '@react-spring/animated': 9.3.1_react@17.0.2
+      '@react-spring/core': 9.3.1_react@17.0.2
+      '@react-spring/shared': 9.3.1_react@17.0.2
+      '@react-spring/types': 9.3.1
+      react: registry.npmmirror.com/react/17.0.2
+    dev: false
+
+  /@react-spring/native/9.3.1_react@17.0.2:
+    resolution: {integrity: sha512-NAC1wHIUvy1umCVQRxcS+31Dmr9NszBY06sHy3jR8/HVuKNtaDUARVF3AYL/HfbIy4m6yR3tcIkM2NQ0SO+rZA==}
+    peerDependencies:
+      react: ^16.8.0  || ^17.0.0
+      react-native: '>=0.58'
+    dependencies:
+      '@react-spring/animated': 9.3.1_react@17.0.2
+      '@react-spring/core': 9.3.1_react@17.0.2
+      '@react-spring/shared': 9.3.1_react@17.0.2
+      '@react-spring/types': 9.3.1
+      react: registry.npmmirror.com/react/17.0.2
+    dev: false
+
+  /@react-spring/rafz/9.3.1:
+    resolution: {integrity: sha512-fEBMCarGVl+/2kdO+g6Zig4F+3ymwmcGN8S71gb1c7Cbbxb87kviPz8EhshfIHoiLeJPGlqwcuGbxNmZbBamvA==}
+    dev: false
+
+  /@react-spring/shared/9.3.1_react@17.0.2:
+    resolution: {integrity: sha512-jhPpxzURGo6Nty90ex1lkxmZae7w/VAbnGmb/nXcYoZwSoNR+W2aAd00iXsh2ZGz6MgoJOsc495JeG3uC7Am8A==}
+    peerDependencies:
+      react: ^16.8.0  || ^17.0.0
+    dependencies:
+      '@react-spring/rafz': 9.3.1
+      '@react-spring/types': 9.3.1
+      react: registry.npmmirror.com/react/17.0.2
+    dev: false
+
+  /@react-spring/three/9.3.1_react@17.0.2:
+    resolution: {integrity: sha512-40iRIX2DrY+a81hIliOog6TMg/ZAtHGeZr95r0vKAsl+iX1g9Hs8XCS4wTeQIUgydZpbpShk/JL6mkcstEfBdw==}
+    peerDependencies:
+      '@react-three/fiber': '>=6.0'
+      react: '>=16.11'
+      three: '>=0.126'
+    dependencies:
+      '@react-spring/animated': 9.3.1_react@17.0.2
+      '@react-spring/core': 9.3.1_react@17.0.2
+      '@react-spring/shared': 9.3.1_react@17.0.2
+      '@react-spring/types': 9.3.1
+      react: registry.npmmirror.com/react/17.0.2
+    dev: false
+
+  /@react-spring/types/9.3.1:
+    resolution: {integrity: sha512-W/YMJMX35XgGGzX0gKORBTwnvQ+1loDOFN3XlZkW5fgpEY+7VkRUpPyqPWXQr3n6lHrsLmHIGdpznqZi54ACTQ==}
+    dev: false
+
+  /@react-spring/web/9.3.1_react-dom@17.0.2+react@17.0.2:
+    resolution: {integrity: sha512-sisZIgFGva/Z+xKWPSfXpukF0AP3kR9ALTxlHL87fVotMUCJX5vtH/YlVcywToEFwTHKt3MpI5Wy2M+vgVEeaw==}
+    peerDependencies:
+      react: ^16.8.0  || ^17.0.0
+      react-dom: ^16.8.0  || ^17.0.0
+    dependencies:
+      '@react-spring/animated': 9.3.1_react@17.0.2
+      '@react-spring/core': 9.3.1_react@17.0.2
+      '@react-spring/shared': 9.3.1_react@17.0.2
+      '@react-spring/types': 9.3.1
+      react: registry.npmmirror.com/react/17.0.2
+      react-dom: registry.npmmirror.com/react-dom/17.0.2_react@17.0.2
+    dev: false
+
+  /@react-spring/zdog/9.3.1_react-dom@17.0.2+react@17.0.2:
+    resolution: {integrity: sha512-QflA/fII9zWe9CSOA8QGSLMjUwyrtD1TX6YVzUSn/nlr2f7PlZPijdpdu9Cvdirgss472cUS7cRIUfll0TepqA==}
+    peerDependencies:
+      react: ^16.8.0  || ^17.0.0
+      react-dom: ^16.8.0  || ^17.0.0
+      react-zdog: '>=1.0'
+      zdog: '>=1.0'
+    dependencies:
+      '@react-spring/animated': 9.3.1_react@17.0.2
+      '@react-spring/core': 9.3.1_react@17.0.2
+      '@react-spring/shared': 9.3.1_react@17.0.2
+      '@react-spring/types': 9.3.1
+      react: registry.npmmirror.com/react/17.0.2
+      react-dom: registry.npmmirror.com/react-dom/17.0.2_react@17.0.2
+    dev: false
 
   /@rsuite/icon-font/4.0.0:
     resolution: {integrity: sha512-rZTgpTH3H3HLczCA2rnkWfoMKm0ZXoRzsrkVujfP/FfslnKUMvO6w56pa8pCvhWGpNEPUsLS2ULnFGpTEcup/Q==}
@@ -4053,6 +4165,27 @@ packages:
     dependencies:
       history: 5.1.0
       react: registry.npmmirror.com/react/17.0.2
+    dev: false
+
+  /react-spring/9.3.2_react-dom@17.0.2+react@17.0.2:
+    resolution: {integrity: sha512-LMFgjvTJVg2ltthzgJcZ7siOdRig7L8wJZIHrc7p6ss4AaJ446xHzm9L2ZQha1ZC9QVY8/e6XfLhMTFAG6dtjw==}
+    dependencies:
+      '@react-spring/core': 9.3.1_react@17.0.2
+      '@react-spring/konva': 9.3.1_react@17.0.2
+      '@react-spring/native': 9.3.1_react@17.0.2
+      '@react-spring/three': 9.3.1_react@17.0.2
+      '@react-spring/web': 9.3.1_react-dom@17.0.2+react@17.0.2
+      '@react-spring/zdog': 9.3.1_react-dom@17.0.2+react@17.0.2
+    transitivePeerDependencies:
+      - '@react-three/fiber'
+      - konva
+      - react
+      - react-dom
+      - react-konva
+      - react-native
+      - react-zdog
+      - three
+      - zdog
     dev: false
 
   /react-virtualized/9.22.3_react-dom@17.0.2+react@17.0.2:
