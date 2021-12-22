@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import WrapperAside from '@/pages/mine/containers/WrapperAside';
-import Main from './main';
+import WrapperMain from '@/pages/mine/containers/WrapperMain';
 
 const Wrapper = styled.section`
   display: flex;
@@ -17,24 +17,11 @@ const Wrapper = styled.section`
   width: min-content;
 `;
 
-const WrapperMain = styled.main`
-  padding: 0;
-  margin: 0;
-  overflow: hidden;
-  display: block;
-  flex: 1;
-  flex-basis: auto;
-  box-sizing: border-box;
-  width: 640px;
-`;
-
 const Mine = () => {
   return (
     <Wrapper>
       <WrapperAside />
-      <WrapperMain>
-        <Main />
-      </WrapperMain>
+      <WrapperMain />
     </Wrapper>
   );
 };

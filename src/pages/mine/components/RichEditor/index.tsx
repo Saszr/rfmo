@@ -16,7 +16,7 @@ import { buildKeymap } from './keymap';
 
 import { MdFormatBold, MdFormatListBulleted, MdFormatListNumbered } from 'react-icons/md';
 
-import Styles from './Editor.module.less';
+import Styles from './RichEditor.module.less';
 
 const newSchema = new Schema({
   nodes: addListNodes(schema.spec.nodes, 'paragraph block*', 'block'),

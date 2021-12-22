@@ -3,21 +3,11 @@ import { useTransition, animated, config } from 'react-spring';
 import { useSize } from 'ahooks';
 
 import MineStoreContainer from '@/store/MineStoreContainer';
-import Stat from '@/pages/mine/components/Stat';
-import Sidebar from '@/pages/mine/components/Sidebar';
 import Drawer from '@/components/Drawer';
 
-import Styles from './WrapperAside.module.less';
+import AsideContent from './AsideContent';
 
-const AsideContent = React.memo(() => {
-  return (
-    <>
-      <h3>Sheng</h3>
-      <Stat />
-      <Sidebar />
-    </>
-  );
-});
+import Styles from './WrapperAside.module.less';
 
 const AsideBasic = () => {
   return (

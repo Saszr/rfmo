@@ -1,27 +1,10 @@
 import React from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Message, EventDetail, Random } from '@rsuite/icons';
 import { useNavigateSearch } from '@/hooks/useRouterDom';
 
-import Styles from './Sidebar.module.less';
+import menuList from '@/pages/mine/containers/WrapperAside/menuList';
 
-const menu = [
-  {
-    name: '',
-    desc: 'MEMO',
-    icon: <Message style={{ marginBottom: '3px' }} />,
-  },
-  {
-    name: 'notify',
-    desc: '每日回顾',
-    icon: <EventDetail style={{ marginBottom: '3px' }} />,
-  },
-  {
-    name: 'lucky',
-    desc: '随机漫步',
-    icon: <Random style={{ marginBottom: '3px' }} />,
-  },
-];
+import Styles from './Sidebar.module.less';
 
 const Sidebar = () => {
   const navigateSearch = useNavigateSearch();
@@ -31,7 +14,7 @@ const Sidebar = () => {
 
   return (
     <ul className={Styles['sidebar-ul']}>
-      {menu.map((menuItem) => {
+      {menuList.map((menuItem) => {
         return (
           <li
             key={menuItem.name}
@@ -51,8 +34,8 @@ const Sidebar = () => {
               );
             }}
           >
-            {menuItem.icon}
-            {menuItem.desc}
+            <span>{menuItem.icon}</span>
+            <span style={{ verticalAlign: '2px' }}>{menuItem.desc}</span>
           </li>
         );
       })}
