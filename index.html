@@ -22,6 +22,12 @@
   </head>
   <body>
     <div id="root"></div>
+    <script language="javascript">
+      history.pushState(null, '', document.URL);
+      window.addEventListener('popstate', function () {
+        history.pushState(null, '', document.URL);
+      });
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
