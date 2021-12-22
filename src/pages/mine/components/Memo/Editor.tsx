@@ -64,27 +64,21 @@ const Editor = () => {
             className={isBold(state) ? Styles['is-active'] : ''}
             onClick={() => toggleBold(state, (tr) => setState(state.apply(tr)))}
           >
-            <span>
-              <MdFormatBold style={{ fontSize: '16px' }} />
-            </span>
+            <MdFormatBold style={{ fontSize: '16px' }} />
           </button>
 
           <button
             style={{ marginLeft: '6px' }}
             onClick={() => toggleUnorderedList(state, (tr) => setState(state.apply(tr)))}
           >
-            <span>
-              <MdFormatListBulleted style={{ fontSize: '16px' }} />
-            </span>
+            <MdFormatListBulleted style={{ fontSize: '16px' }} />
           </button>
 
           <button
             style={{ marginLeft: '6px' }}
             onClick={() => toggleOrderedList(state, (tr) => setState(state.apply(tr)))}
           >
-            <span>
-              <MdFormatListNumbered style={{ fontSize: '16px' }} />
-            </span>
+            <MdFormatListNumbered style={{ fontSize: '16px' }} />
           </button>
         </div>
         <div className={Styles['pin-right']}>
