@@ -2,6 +2,8 @@ import React from 'react';
 import MineStoreContainer from '@/store/MineStoreContainer';
 import MenuIcon from '@rsuite/icons/Menu';
 
+import Editor from './Editor';
+
 import Styles from './Memo.module.less';
 
 const Memo = () => {
@@ -31,7 +33,9 @@ const Memo = () => {
         </div>
         <span>🔍</span>
       </div>
-      <div className={Styles.input}>~</div>
+      <div className={Styles.input}>
+        <Editor />
+      </div>
     </div>
   );
 };

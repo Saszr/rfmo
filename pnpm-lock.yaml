@@ -3,6 +3,14 @@ lockfileVersion: 5.3
 specifiers:
   '@rsuite/icons': ^1.0.2
   '@types/node': ^16.11.12
+  '@types/prosemirror-commands': ^1.0.4
+  '@types/prosemirror-history': ^1.0.3
+  '@types/prosemirror-keymap': ^1.0.4
+  '@types/prosemirror-model': ^1.13.2
+  '@types/prosemirror-schema-basic': ^1.0.2
+  '@types/prosemirror-schema-list': ^1.0.3
+  '@types/prosemirror-state': ^1.2.8
+  '@types/prosemirror-view': ^1.19.2
   '@types/react': ^17.0.33
   '@types/react-dom': ^17.0.10
   '@types/styled-components': ^5.1.18
@@ -17,15 +25,25 @@ specifiers:
   lodash: ^4.17.21
   postcss: ^8.4.5
   postcss-import: ^14.0.2
+  prosemirror-commands: ^1.1.12
+  prosemirror-history: ^1.2.0
+  prosemirror-keymap: ^1.1.5
+  prosemirror-model: ^1.15.0
+  prosemirror-schema-basic: ^1.1.2
+  prosemirror-schema-list: ^1.1.6
+  prosemirror-state: ^1.3.4
+  prosemirror-view: ^1.23.3
   qs: ^6.10.2
   react: ^17.0.2
   react-dom: ^17.0.2
+  react-icons: ^4.3.1
   react-router-dom: ^6.1.1
   react-spring: ^9.3.2
   rsuite: ^5.3.0
   styled-components: ^5.3.3
   tailwindcss: ^3.0.2
   typescript-plugin-css-modules: ^3.4.0
+  use-prosemirror: ^1.2.2
   vite: ^2.7.2
 
 dependencies:
@@ -35,16 +53,34 @@ dependencies:
   dayjs: 1.10.7
   heo: 1.4.0_react@17.0.2
   lodash: 4.17.21
+  prosemirror-commands: 1.1.12
+  prosemirror-history: 1.2.0
+  prosemirror-keymap: 1.1.5
+  prosemirror-model: 1.15.0
+  prosemirror-schema-basic: 1.1.2
+  prosemirror-schema-list: 1.1.6
+  prosemirror-state: 1.3.4
+  prosemirror-view: 1.23.3
   qs: 6.10.2
   react: registry.npmmirror.com/react/17.0.2
   react-dom: registry.npmmirror.com/react-dom/17.0.2_react@17.0.2
+  react-icons: 4.3.1_react@17.0.2
   react-router-dom: 6.1.1_react-dom@17.0.2+react@17.0.2
   react-spring: 9.3.2_react-dom@17.0.2+react@17.0.2
   rsuite: 5.3.0_react-dom@17.0.2+react@17.0.2
   styled-components: 5.3.3_react-dom@17.0.2+react@17.0.2
+  use-prosemirror: 1.2.2_7a31c4d518f9bb1d8ed7127acf890b2d
 
 devDependencies:
   '@types/node': registry.npmmirror.com/@types/node/16.11.12
+  '@types/prosemirror-commands': 1.0.4
+  '@types/prosemirror-history': 1.0.3
+  '@types/prosemirror-keymap': 1.0.4
+  '@types/prosemirror-model': 1.13.2
+  '@types/prosemirror-schema-basic': 1.0.2
+  '@types/prosemirror-schema-list': 1.0.3
+  '@types/prosemirror-state': 1.2.8
+  '@types/prosemirror-view': 1.19.2
   '@types/react': registry.npmmirror.com/@types/react/17.0.37
   '@types/react-dom': registry.npmmirror.com/@types/react-dom/17.0.11
   '@types/styled-components': 5.1.18
@@ -1600,12 +1636,82 @@ packages:
     resolution: {integrity: sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==}
     dev: true
 
+  /@types/orderedmap/1.0.0:
+    resolution: {integrity: sha512-dxKo80TqYx3YtBipHwA/SdFmMMyLCnP+5mkEqN0eMjcTBzHkiiX0ES118DsjDBjvD+zeSsSU9jULTZ+frog+Gw==}
+    dev: true
+
   /@types/parse-json/4.0.0:
     resolution: {integrity: sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==}
     dev: true
 
   /@types/prop-types/15.7.4:
     resolution: {integrity: sha512-rZ5drC/jWjrArrS8BR6SIr4cWpW09RNTYt9AMZo3Jwwif+iacXAqgVjm0B0Bv/S1jhDXKHqRVNCbACkJ89RAnQ==}
+
+  /@types/prosemirror-commands/1.0.4:
+    resolution: {integrity: sha512-utDNYB3EXLjAfYIcRWJe6pn3kcQ5kG4RijbT/0Y/TFOm6yhvYS/D9eJVnijdg9LDjykapcezchxGRqFD5LcyaQ==}
+    dependencies:
+      '@types/prosemirror-model': 1.13.2
+      '@types/prosemirror-state': 1.2.8
+      '@types/prosemirror-view': 1.19.2
+    dev: true
+
+  /@types/prosemirror-history/1.0.3:
+    resolution: {integrity: sha512-5TloMDRavgLjOAKXp1Li8u0xcsspzbT1Cm9F2pwHOkgvQOz1jWQb2VIXO7RVNsFjLBZdIXlyfSLivro3DuMWXg==}
+    dependencies:
+      '@types/prosemirror-model': 1.13.2
+      '@types/prosemirror-state': 1.2.8
+    dev: true
+
+  /@types/prosemirror-keymap/1.0.4:
+    resolution: {integrity: sha512-ycevwkqUh+jEQtPwqO7sWGcm+Sybmhu8MpBsM8DlO3+YTKnXbKA6SDz/+q14q1wK3UA8lHJyfR+v+GPxfUSemg==}
+    dependencies:
+      '@types/prosemirror-commands': 1.0.4
+      '@types/prosemirror-model': 1.13.2
+      '@types/prosemirror-state': 1.2.8
+      '@types/prosemirror-view': 1.19.2
+    dev: true
+
+  /@types/prosemirror-model/1.13.2:
+    resolution: {integrity: sha512-a2rDB0aZ+7aIP7uBqQq1wLb4Hg4qqEvpkCqvhsgT/gG8IWC0peCAZfQ24sgTco0qSJLeDgIbtPeU6mgr869/kg==}
+    dependencies:
+      '@types/orderedmap': 1.0.0
+    dev: true
+
+  /@types/prosemirror-schema-basic/1.0.2:
+    resolution: {integrity: sha512-dzT/6t+dq8/On1be0yarcOIu8wROjhK8QB5wslpLbtTIr5wb0iQv/esJm/KAHcD/PBXR9nSV4TL5AtQmBrcRnw==}
+    dependencies:
+      '@types/prosemirror-model': 1.13.2
+    dev: true
+
+  /@types/prosemirror-schema-list/1.0.3:
+    resolution: {integrity: sha512-uWybOf+M2Ea7rlbs0yLsS4YJYNGXYtn4N+w8HCw3Vvfl6wBAROzlMt0gV/D/VW/7J/LlAjwMezuGe8xi24HzXA==}
+    dependencies:
+      '@types/orderedmap': 1.0.0
+      '@types/prosemirror-model': 1.13.2
+      '@types/prosemirror-state': 1.2.8
+    dev: true
+
+  /@types/prosemirror-state/1.2.8:
+    resolution: {integrity: sha512-mq9uyQWcpu8jeamO6Callrdvf/e1H/aRLR2kZWSpZrPHctEsxWHBbluD/wqVjXBRIOoMHLf6ZvOkrkmGLoCHVA==}
+    dependencies:
+      '@types/prosemirror-model': 1.13.2
+      '@types/prosemirror-transform': 1.1.5
+      '@types/prosemirror-view': 1.19.2
+    dev: true
+
+  /@types/prosemirror-transform/1.1.5:
+    resolution: {integrity: sha512-Wr2HXaEF4JPklWpC17RTxE6PxyU54Taqk5FMhK1ojgcN93J+GpkYW8s0mD3rl7KfTmlhVwZPCHE9o0cYf2Go5A==}
+    dependencies:
+      '@types/prosemirror-model': 1.13.2
+    dev: true
+
+  /@types/prosemirror-view/1.19.2:
+    resolution: {integrity: sha512-pmh2DuMJzva4D7SxspRKIzkV6FK2o52uAqGjq2dPYcQFPwu4+5RcS1TMjFVCh1R+Ia1Rx8wsCNIId/5+6DB0Bg==}
+    dependencies:
+      '@types/prosemirror-model': 1.13.2
+      '@types/prosemirror-state': 1.2.8
+      '@types/prosemirror-transform': 1.1.5
+    dev: true
 
   /@types/react-virtualized/9.21.15:
     resolution: {integrity: sha512-R4ntUW+Y/a7RgRpfeYz3iRe+kaDWtXieMeQum4AoYjjZsR/QhpKqFu4muSBhzA7OHJHd6qA0KkeTzxj5ah5tmQ==}
@@ -3914,6 +4020,10 @@ packages:
       word-wrap: 1.2.3
     dev: true
 
+  /orderedmap/1.1.1:
+    resolution: {integrity: sha512-3Ux8um0zXbVacKUkcytc0u3HgC0b0bBLT+I60r2J/En72cI0nZffqrA7Xtf2Hqs27j1g82llR5Mhbd0Z1XW4AQ==}
+    dev: false
+
   /p-limit/2.3.0:
     resolution: {integrity: sha512-//88mFWSJx8lxCzwdAABTJL2MyWB12+eIY7MDL2SqLmAkeKU9qxRvWuSyTjm3FUmpBEMuFfckAIqEaVGUDxb6w==}
     engines: {node: '>=6'}
@@ -4114,6 +4224,69 @@ packages:
       object-assign: 4.1.1
       react-is: 16.13.1
 
+  /prosemirror-commands/1.1.12:
+    resolution: {integrity: sha512-+CrMs3w/ZVPSkR+REg8KL/clyFLv/1+SgY/OMN+CB22Z24j9TZDje72vL36lOZ/E4NeRXuiCcmENcW/vAcG67A==}
+    dependencies:
+      prosemirror-model: 1.15.0
+      prosemirror-state: 1.3.4
+      prosemirror-transform: 1.3.3
+    dev: false
+
+  /prosemirror-history/1.2.0:
+    resolution: {integrity: sha512-B9v9xtf4fYbKxQwIr+3wtTDNLDZcmMMmGiI3TAPShnUzvo+Rmv1GiUrsQChY1meetHl7rhML2cppF3FTs7f7UQ==}
+    dependencies:
+      prosemirror-state: 1.3.4
+      prosemirror-transform: 1.3.3
+      rope-sequence: 1.3.2
+    dev: false
+
+  /prosemirror-keymap/1.1.5:
+    resolution: {integrity: sha512-8SZgPH3K+GLsHL2wKuwBD9rxhsbnVBTwpHCO4VUO5GmqUQlxd/2GtBVWTsyLq4Dp3N9nGgPd3+lZFKUDuVp+Vw==}
+    dependencies:
+      prosemirror-state: 1.3.4
+      w3c-keyname: 2.2.4
+    dev: false
+
+  /prosemirror-model/1.15.0:
+    resolution: {integrity: sha512-hQJv7SnIhlAy9ga3lhPPgaufhvCbQB9tHwscJ9E1H1pPHmN8w5V/lURueoYv9Kc3/bpNWoyHa8r3g//m7N0ChQ==}
+    dependencies:
+      orderedmap: 1.1.1
+    dev: false
+
+  /prosemirror-schema-basic/1.1.2:
+    resolution: {integrity: sha512-G4q8WflNsR1Q33QAV4MQO0xWrHLOJ+BQcKswGXMy626wlQj6c/1n1v4eC9ns+h2y1r/fJHZEgSZnsNhm9lbrDw==}
+    dependencies:
+      prosemirror-model: 1.15.0
+    dev: false
+
+  /prosemirror-schema-list/1.1.6:
+    resolution: {integrity: sha512-aFGEdaCWmJzouZ8DwedmvSsL50JpRkqhQ6tcpThwJONVVmCgI36LJHtoQ4VGZbusMavaBhXXr33zyD2IVsTlkw==}
+    dependencies:
+      prosemirror-model: 1.15.0
+      prosemirror-transform: 1.3.3
+    dev: false
+
+  /prosemirror-state/1.3.4:
+    resolution: {integrity: sha512-Xkkrpd1y/TQ6HKzN3agsQIGRcLckUMA9u3j207L04mt8ToRgpGeyhbVv0HI7omDORIBHjR29b7AwlATFFf2GLA==}
+    dependencies:
+      prosemirror-model: 1.15.0
+      prosemirror-transform: 1.3.3
+    dev: false
+
+  /prosemirror-transform/1.3.3:
+    resolution: {integrity: sha512-9NLVXy1Sfa2G6qPqhWMkEvwQQMTw7OyTqOZbJaGQWsCeH3hH5Cw+c5eNaLM1Uu75EyKLsEZhJ93XpHJBa6RX8A==}
+    dependencies:
+      prosemirror-model: 1.15.0
+    dev: false
+
+  /prosemirror-view/1.23.3:
+    resolution: {integrity: sha512-89icyMdXXwxmTxYj0TIuG5M/d0iKeu79tr+PVtC/4qtCOoHrPSPrblJcFOuOWcxGlA/Ei8PqJB4g5HkKR8jWvQ==}
+    dependencies:
+      prosemirror-model: 1.15.0
+      prosemirror-state: 1.3.4
+      prosemirror-transform: 1.3.3
+    dev: false
+
   /punycode/2.1.1:
     resolution: {integrity: sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==}
     engines: {node: '>=6'}
@@ -4134,6 +4307,14 @@ packages:
     resolution: {integrity: sha512-ARhCpm70fzdcvNQfPoy49IaanKkTlRWF2JMzqhcJbhSFRZv7nPTvZJdcY7301IPmvW+/p0RgIWnQDLJxifsQ7g==}
     engines: {node: '>=8'}
     dev: true
+
+  /react-icons/4.3.1_react@17.0.2:
+    resolution: {integrity: sha512-cB10MXLTs3gVuXimblAdI71jrJx8njrJZmNMEMC+sQu5B/BIOmlsAjskdqpn81y8UBVEGuHODd7/ci5DvoSzTQ==}
+    peerDependencies:
+      react: '*'
+    dependencies:
+      react: registry.npmmirror.com/react/17.0.2
+    dev: false
 
   /react-is/16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
@@ -4373,6 +4554,10 @@ packages:
     dependencies:
       glob: 7.2.0
     dev: true
+
+  /rope-sequence/1.3.2:
+    resolution: {integrity: sha512-ku6MFrwEVSVmXLvy3dYph3LAMNS0890K7fabn+0YIRQ2T96T9F4gkFf0vf0WW0JUraNWwGRtInEpH7yO4tbQZg==}
+    dev: false
 
   /rsuite-table/5.2.2_9bdd65c2b60ce8638444b80b396a481b:
     resolution: {integrity: sha512-KnzzUm4ZoyR/RJeFkSHaBskXvWwSSG+Fxp3q7QNh9taEUgD2NHLswz1y37Os45Kf8iOHHKZA9Gc3KSSkhys+5w==}
@@ -5013,6 +5198,22 @@ packages:
     deprecated: Please see https://github.com/lydell/urix#deprecated
     dev: true
 
+  /use-prosemirror/1.2.2_7a31c4d518f9bb1d8ed7127acf890b2d:
+    resolution: {integrity: sha512-Q/5g6A2lJ2jFU6Och4cPFfeMBjLjSdPthOpQA3muKmcswgOWMY9VHWL4171i8Nx/heZuwJ/3dH374z8gvZiRtQ==}
+    peerDependencies:
+      prosemirror-model: ^1.11.0
+      prosemirror-state: ^1.3.3
+      prosemirror-view: ^1.15.5
+      react: ^16.8.0 || ^17.0.0
+      react-dom: ^16.8.0 || ^17.0.0
+    dependencies:
+      prosemirror-model: 1.15.0
+      prosemirror-state: 1.3.4
+      prosemirror-view: 1.23.3
+      react: registry.npmmirror.com/react/17.0.2
+      react-dom: registry.npmmirror.com/react-dom/17.0.2_react@17.0.2
+    dev: false
+
   /util-deprecate/1.0.2:
     resolution: {integrity: sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8=}
     dev: true
@@ -5050,6 +5251,10 @@ packages:
       remove-trailing-separator: 1.1.0
       replace-ext: 1.0.1
     dev: true
+
+  /w3c-keyname/2.2.4:
+    resolution: {integrity: sha512-tOhfEwEzFLJzf6d1ZPkYfGj+FWhIpBux9ppoP3rlclw3Z0BZv3N7b7030Z1kYth+6rDuAsXUFr+d0VE6Ed1ikw==}
+    dev: false
 
   /which-boxed-primitive/1.0.2:
     resolution: {integrity: sha512-bwZdv0AKLpplFY2KZRX6TvyuN7ojjr7lwkg6ml0roIy9YeuSr7JS372qlNW18UQYzgYK9ziGcerWqZOmEn9VNg==}
