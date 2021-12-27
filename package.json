@@ -7,6 +7,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@octokit/endpoint": "^6.0.12",
+    "@octokit/types": "^6.34.0",
     "@rsuite/icons": "^1.0.2",
     "ahooks": "^3.0.3",
     "classnames": "^2.3.1",
@@ -29,6 +31,7 @@
     "react-spring": "^9.3.2",
     "rsuite": "^5.4.1",
     "styled-components": "^5.3.3",
+    "umi-request": "^1.4.0",
     "use-prosemirror": "^1.2.2"
   },
   "devDependencies": {
