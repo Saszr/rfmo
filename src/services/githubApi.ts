@@ -26,6 +26,8 @@ export const create_user_repo = async () => {
   const options = endpoint('POST /user/repos', {
     data: JSON.stringify({
       name: 'rfmo-library',
+      private: true,
+      description: 'Data storage for RFMO APP',
     }),
   });
   return await octokitRequest(options);

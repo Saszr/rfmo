@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import { Button, Input } from 'rsuite';
 import { VscGithubInverted } from 'react-icons/vsc';
 import { useLocalStorageState } from 'ahooks';
+import { useNavigate } from 'react-router-dom';
 
-import { get_user_repo } from '@/services/githubApi';
+import { get_user_repo, create_user_repo } from '@/services/githubApi';
 
 import Styles from './index.module.less';
 
@@ -17,6 +18,8 @@ const Wrapper = styled.section`
 `;
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const [token, setToken] = useLocalStorageState('rfmo', {
     defaultValue: localStorage.getItem('rfmo') || '',
   });
@@ -32,8 +35,22 @@ const Login = () => {
     if (inputRef.current) {
       setToken(inputRef.current.value);
 
-      const repoInfo = await get_user_repo();
-      console.log('repoInfo: ', repoInfo);
+      const toMine = () => {
+        navigate('/mine', { replace: true });
+        history.pushState(null, '', document.URL);
+      };
+
+      await get_user_repo()
+        .then(() => {
+          toMine();
+        })
+        .catch((err) => {
+          if (err.message === 'Not Found') {
+            create_user_repo().then(() => {
+              toMine();
+            });
+          }
+        });
     }
   };
 

@@ -8,7 +8,7 @@ import Login from '@/pages/login';
 function Index() {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/mine" />} />
+      <Route path="/" element={<Navigate to="/login" />} />
       <Route
         path="/mine"
         element={
