@@ -7,10 +7,12 @@ interface RequestMethod {
 }
 
 const octokitRequest: RequestMethod = (options) => {
-  const access_token = localStorage.getItem('rfmo');
+  const rfmo = localStorage.getItem('rfmo')!;
+  const access_token = JSON.parse(rfmo).token;
+
   if (access_token) {
     const baseHeaders = {
-      authorization: `token ${JSON.parse(access_token)}`,
+      authorization: `token ${access_token}`,
     };
 
     return baseRequest({ ...options, headers: { ...baseHeaders, ...options.headers } });

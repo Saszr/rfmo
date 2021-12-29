@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { Button, Input } from 'rsuite';
 import { VscGithubInverted } from 'react-icons/vsc';
-import { useLocalStorageState } from 'ahooks';
 import { useNavigate } from 'react-router-dom';
 
+import useLocalData from '@/hooks/useLocalData';
 import { get_user_repo, create_user_repo } from '@/services/githubApi';
 
 import Styles from './index.module.less';
@@ -20,34 +20,35 @@ const Wrapper = styled.section`
 const Login = () => {
   const navigate = useNavigate();
 
-  const [token, setToken] = useLocalStorageState('rfmo', {
-    defaultValue: localStorage.getItem('rfmo') || '',
-  });
+  const [localData, setLocalData] = useLocalData();
   const inputRef = React.useRef<HTMLInputElement>(null);
 
   React.useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.value = token;
+    if (inputRef.current && localData.token) {
+      inputRef.current.value = localData.token;
     }
-  }, [token]);
+  }, [localData]);
 
   const githubLogin = async () => {
     if (inputRef.current) {
-      setToken(inputRef.current.value);
+      const token = inputRef.current.value;
+      setLocalData({ ...localData, token });
 
-      const toMine = () => {
+      const toMine = (params: any) => {
+        setLocalData({ ...localData, owner: params.owner });
+
         navigate('/mine', { replace: true });
         history.pushState(null, '', document.URL);
       };
 
       await get_user_repo()
-        .then(() => {
-          toMine();
+        .then((res) => {
+          toMine(res);
         })
         .catch((err) => {
           if (err.message === 'Not Found') {
-            create_user_repo().then(() => {
-              toMine();
+            create_user_repo().then((res) => {
+              toMine(res);
             });
           }
         });

@@ -22,8 +22,10 @@ specifiers:
   dayjs: ^1.10.7
   fiber-lint: ^0.0.4
   heo: ^1.4.0
+  js-base64: ^3.7.2
   less: ^4.1.2
   lodash: ^4.17.21
+  nanoid: ^3.1.30
   prosemirror-commands: ^1.1.12
   prosemirror-history: ^1.2.0
   prosemirror-keymap: ^1.1.5
@@ -54,7 +56,9 @@ dependencies:
   classnames: 2.3.1
   dayjs: 1.10.7
   heo: 1.4.0_react@17.0.2
+  js-base64: 3.7.2
   lodash: 4.17.21
+  nanoid: 3.1.30
   prosemirror-commands: 1.1.12
   prosemirror-history: 1.2.0
   prosemirror-keymap: 1.1.5
@@ -3791,6 +3795,10 @@ packages:
       supports-color: 7.2.0
     dev: true
 
+  /js-base64/3.7.2:
+    resolution: {integrity: sha512-NnRs6dsyqUXejqk/yv2aiXlAvOs56sLkX6nUdeaNezI5LFFLlsZjOThmwnrcwh5ZZRwZlCMnVAY3CvhIhoVEKQ==}
+    dev: false
+
   /js-cookie/3.0.1:
     resolution: {integrity: sha512-+0rgsUXZu4ncpPxRL+lNEptWMOWl9etvPHc/koSRp6MPwpRYAhmk0dUG00J4bxVV3r9uUzfo24wW0knS07SKSw==}
     engines: {node: '>=12'}
@@ -4148,7 +4156,6 @@ packages:
     resolution: {integrity: sha512-zJpuPDwOv8D2zq2WRoMe1HsfZthVewpel9CAvTfc/2mBD1uUT/agc5f7GHGWXlYkFvi1mVxe4IjvP2HNrop7nQ==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
-    dev: true
 
   /natural-compare/1.4.0:
     resolution: {integrity: sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=}
@@ -6623,14 +6630,6 @@ packages:
     version: 2.1.2
     dev: true
 
-  registry.npmmirror.com/nanoid/3.1.30:
-    resolution: {integrity: sha1-Y/k8xUjSoRPcXfvGO/oJ4rm2Q2I=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/nanoid/download/nanoid-3.1.30.tgz}
-    name: nanoid
-    version: 3.1.30
-    engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
-    hasBin: true
-    dev: true
-
   registry.npmmirror.com/node-releases/2.0.1:
     resolution: {integrity: sha1-PR05XyBPHy8ppUNYuftnh2WtL8U=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/node-releases/download/node-releases-2.0.1.tgz?cache=0&sync_timestamp=1634807333149&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fnode-releases%2Fdownload%2Fnode-releases-2.0.1.tgz}
     name: node-releases
@@ -6656,7 +6655,7 @@ packages:
     version: 8.4.5
     engines: {node: ^10 || ^12 || >=14}
     dependencies:
-      nanoid: registry.npmmirror.com/nanoid/3.1.30
+      nanoid: 3.1.30
       picocolors: registry.npmmirror.com/picocolors/1.0.0
       source-map-js: registry.npmmirror.com/source-map-js/1.0.1
     dev: true

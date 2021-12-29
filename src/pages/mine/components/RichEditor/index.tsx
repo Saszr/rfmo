@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Schema } from 'prosemirror-model';
+import { Schema, DOMSerializer } from 'prosemirror-model';
 import { schema } from 'prosemirror-schema-basic';
 import { addListNodes, wrapInList } from 'prosemirror-schema-list';
 import { history } from 'prosemirror-history';
@@ -13,6 +13,7 @@ import type { MarkType } from 'prosemirror-model';
 import type { Transaction, EditorState } from 'prosemirror-state';
 
 import { buildKeymap } from './keymap';
+import { update_file_contents } from '@/services/githubApi';
 
 import { MdFormatBold, MdFormatListBulleted, MdFormatListNumbered } from 'react-icons/md';
 
@@ -49,13 +50,25 @@ const opts: Parameters<typeof useProseMirror>[0] = {
 };
 
 const Editor = () => {
-  const editorContentRef = React.useRef(null);
-
   const [state, setState] = useProseMirror(opts);
+  const [curInputValue, setCurInputValue] = React.useState('');
+
+  React.useEffect(() => {
+    const fragment = DOMSerializer.fromSchema(newSchema).serializeFragment(state.doc.content);
+    const div = document.createElement('div');
+    div.appendChild(fragment);
+    setCurInputValue(div.innerHTML);
+  }, [state]);
+
+  const submit = () => {
+    console.log(curInputValue);
+
+    update_file_contents(curInputValue);
+  };
 
   return (
     <div className={Styles['input-box']}>
-      <div className={Styles['editor-content']} ref={editorContentRef}>
+      <div className={Styles['editor-content']}>
         <ProseMirror className="ProseMirror" state={state} onChange={setState} />
       </div>
       <div className={Styles['editor-menu-bar']}>
@@ -82,7 +95,7 @@ const Editor = () => {
           </button>
         </div>
         <div className={Styles['pin-right']}>
-          <button>发送</button>
+          <button onClick={submit}>发送</button>
         </div>
       </div>
     </div>
