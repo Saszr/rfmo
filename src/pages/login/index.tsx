@@ -40,7 +40,6 @@ const Login = () => {
         setLocalData({ ...curLocalData, owner: params.owner });
 
         navigate('/mine', { replace: true });
-        history.pushState(null, '', document.URL);
       };
 
       await get_user_repo()

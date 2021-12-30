@@ -32,7 +32,6 @@ const Sidebar = () => {
                       source: menuItem.name,
                     },
               );
-              history.pushState(null, '', document.URL);
             }}
           >
             <span>{menuItem.icon}</span>
