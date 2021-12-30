@@ -32,10 +32,12 @@ const Login = () => {
   const githubLogin = async () => {
     if (inputRef.current) {
       const token = inputRef.current.value;
-      setLocalData({ ...localData, token });
+
+      const curLocalData = { ...localData, token };
+      setLocalData(curLocalData);
 
       const toMine = (params: any) => {
-        setLocalData({ ...localData, owner: params.owner });
+        setLocalData({ ...curLocalData, owner: params.owner });
 
         navigate('/mine', { replace: true });
         history.pushState(null, '', document.URL);
