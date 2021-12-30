@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Schema, DOMSerializer } from 'prosemirror-model';
+import { Schema, DOMSerializer, DOMParser as ProseMirrorDOMParser } from 'prosemirror-model';
 import { schema } from 'prosemirror-schema-basic';
 import { addListNodes, wrapInList } from 'prosemirror-schema-list';
 import { history } from 'prosemirror-history';
@@ -8,13 +8,14 @@ import { keymap } from 'prosemirror-keymap';
 import { baseKeymap, toggleMark } from 'prosemirror-commands';
 import { useProseMirror, ProseMirror } from 'use-prosemirror';
 import { EditorState } from 'prosemirror-state';
+import { useMemoizedFn } from 'ahooks';
 
 import type { Command } from 'prosemirror-commands';
 import type { MarkType } from 'prosemirror-model';
 import type { Transaction } from 'prosemirror-state';
 
 import { buildKeymap } from './keymap';
-import { update_file_contents } from '@/services/githubApi';
+import { create_issue } from '@/services/githubApi';
 
 import { MdFormatBold, MdFormatListBulleted, MdFormatListNumbered } from 'react-icons/md';
 
@@ -45,14 +46,46 @@ const toggleBold = toggleMarkCommand(newSchema.marks.strong);
 const toggleOrderedList = wrapInList(newSchema.nodes.ordered_list);
 const toggleUnorderedList = wrapInList(newSchema.nodes.bullet_list);
 
-const opts: Parameters<typeof useProseMirror>[0] = {
-  schema: newSchema,
-  plugins: [keymap(buildKeymap(newSchema)), keymap(baseKeymap), history()],
+const getOpts = () => {
+  const opts: Parameters<typeof useProseMirror>[0] = {
+    schema: newSchema,
+    plugins: [keymap(buildKeymap(newSchema)), keymap(baseKeymap), history()],
+  };
+
+  return opts;
 };
 
-const Editor = () => {
-  const [state, setState] = useProseMirror(opts);
+interface EditorProps {
+  initDoc?: string;
+}
+
+const Editor: React.FC<EditorProps> = ({ initDoc }) => {
+  const viewRef = React.useRef(null);
+  const [state, setState] = useProseMirror(getOpts());
   const [curInputValue, setCurInputValue] = React.useState('');
+
+  const initEditor = useMemoizedFn(() => {
+    const opts = getOpts();
+
+    if (viewRef.current) {
+      if (initDoc) {
+        const doc = new DOMParser().parseFromString(initDoc, 'text/html');
+        const node = ProseMirrorDOMParser.fromSchema(schema).parse(doc, {
+          preserveWhitespace: true,
+        });
+        opts.doc = node;
+      }
+
+      const initState = EditorState.create(opts);
+      setState(initState);
+
+      // if (initDoc) setState(state.apply(state.tr.replaceSelectionWith(newSchema.text(initDoc))));
+    }
+  });
+
+  React.useEffect(() => {
+    initEditor();
+  }, [initEditor]);
 
   React.useEffect(() => {
     const fragment = DOMSerializer.fromSchema(newSchema).serializeFragment(state.doc.content);
@@ -62,7 +95,9 @@ const Editor = () => {
   }, [state]);
 
   const submit = () => {
-    update_file_contents(curInputValue).then(() => {
+    create_issue(curInputValue).then(() => {
+      const opts = getOpts();
+
       const newState = EditorState.create(opts);
       setState(newState);
     });
@@ -71,7 +106,7 @@ const Editor = () => {
   return (
     <div className={Styles['input-box']}>
       <div className={Styles['editor-content']}>
-        <ProseMirror className="ProseMirror" state={state} onChange={setState} />
+        <ProseMirror ref={viewRef} className="ProseMirror" state={state} onChange={setState} />
       </div>
       <div className={Styles['editor-menu-bar']}>
         <div className={Styles['pin-left']}>

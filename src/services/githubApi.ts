@@ -51,3 +51,31 @@ export const update_file_contents = async (curInputValue: string) => {
   });
   return await octokitRequest(options);
 };
+
+export const create_issue = async (curInputValue: string) => {
+  const rfmo = localStorage.getItem('rfmo')!;
+  const login = JSON.parse(rfmo).owner.login;
+
+  const options = endpoint('POST /repos/{owner}/{repo}/issues', {
+    owner: login,
+    repo: 'rfmo-library',
+
+    data: JSON.stringify({
+      title: 'note',
+      body: curInputValue,
+      labels: ['note'],
+    }),
+  });
+  return await octokitRequest(options);
+};
+
+export const get_list_issues = async () => {
+  const rfmo = localStorage.getItem('rfmo')!;
+  const login = JSON.parse(rfmo).owner.login;
+
+  const options = endpoint('GET /repos/{owner}/{repo}/issues', {
+    owner: login,
+    repo: 'rfmo-library',
+  });
+  return await octokitRequest(options);
+};

@@ -1,0 +1,43 @@
+.memos {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  padding: 0 20px 10px;
+
+  .memo {
+    margin: 5px 0 5px;
+  }
+}
+
+.card {
+  position: relative;
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 15px;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .time {
+      display: block;
+      font-size: 12px;
+      color: #8f9193;
+      text-decoration: none;
+    }
+  }
+
+  .content {
+    color: #323232;
+    font-size: 14px;
+    position: relative;
+    overflow: hidden;
+
+    p {
+      line-height: 1.8;
+      min-height: 20px;
+      margin: 0;
+    }
+  }
+}
