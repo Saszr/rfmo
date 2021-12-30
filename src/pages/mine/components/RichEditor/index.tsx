@@ -7,10 +7,11 @@ import { history } from 'prosemirror-history';
 import { keymap } from 'prosemirror-keymap';
 import { baseKeymap, toggleMark } from 'prosemirror-commands';
 import { useProseMirror, ProseMirror } from 'use-prosemirror';
+import { EditorState } from 'prosemirror-state';
 
 import type { Command } from 'prosemirror-commands';
 import type { MarkType } from 'prosemirror-model';
-import type { Transaction, EditorState } from 'prosemirror-state';
+import type { Transaction } from 'prosemirror-state';
 
 import { buildKeymap } from './keymap';
 import { update_file_contents } from '@/services/githubApi';
@@ -61,9 +62,10 @@ const Editor = () => {
   }, [state]);
 
   const submit = () => {
-    console.log(curInputValue);
-
-    update_file_contents(curInputValue);
+    update_file_contents(curInputValue).then(() => {
+      const newState = EditorState.create(opts);
+      setState(newState);
+    });
   };
 
   return (
