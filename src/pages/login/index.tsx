@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button, Input } from 'rsuite';
 import { VscGithubInverted } from 'react-icons/vsc';
 import { useNavigate } from 'react-router-dom';
 
@@ -63,21 +62,19 @@ const Login = () => {
           <h1>Login to Rfmo</h1>
         </div>
         <div className={Styles['login-form']}>
-          <Input ref={inputRef} placeholder="Enter Github Token" style={{ marginBottom: '24px' }} />
-
-          <Button
-            appearance="primary"
-            style={{ width: '100%', backgroundColor: '#5c968a', height: '48px' }}
-            onClick={githubLogin}
-          >
-            <span>
+          <input
+            className={Styles['login-input']}
+            style={{ marginBottom: '24px' }}
+            ref={inputRef}
+            type="text"
+            placeholder="Enter Github Token"
+          />
+          <button className={Styles['login-button']} onClick={githubLogin}>
+            <span style={{ display: 'flex', marginRight: '1rem' }}>
               <VscGithubInverted style={{ fontSize: '20px' }} />
             </span>
-
-            <span style={{ verticalAlign: '3px', marginLeft: '1rem', fontSize: '20px' }}>
-              Continue with Github Token
-            </span>
-          </Button>
+            Continue with Github Token
+          </button>
         </div>
       </main>
     </Wrapper>

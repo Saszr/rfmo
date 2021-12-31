@@ -23,13 +23,13 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
+      'antd/dist/antd.less$': path.resolve(__dirname, './src/antd.less'),
     },
   },
   css: {
     preprocessorOptions: {
       less: {
         javascriptEnabled: true,
-        modifyVars: { '@enable-css-reset': false },
       },
     },
   },

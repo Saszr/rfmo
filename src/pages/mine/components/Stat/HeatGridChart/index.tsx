@@ -1,7 +1,7 @@
 import React from 'react';
 import dayjs from 'dayjs';
 import classNames from 'classnames';
-import { Whisper, Tooltip } from 'rsuite';
+import { Tooltip } from 'antd';
 
 import Styles from './HeatGridChart.module.less';
 
@@ -96,26 +96,15 @@ const HeatGridChart = () => {
                     ? Styles.darkGreen
                     : '';
 
-                const tooltip = (
-                  <Tooltip>
-                    <p className={'py-1'}>
-                      {curMemoCount} memo on {day}
-                    </p>
-                  </Tooltip>
-                );
-
                 return (
-                  <Whisper
-                    // eslint-disable-next-line react/no-array-index-key
+                  // eslint-disable-next-line react/no-array-index-key
+                  <Tooltip
                     key={y}
-                    placement="top"
-                    controlId="control-id-hover"
-                    trigger="hover"
-                    speaker={tooltip}
-                    delay={300}
+                    title={`${curMemoCount} memo on ${day}`}
+                    overlayInnerStyle={{ borderRadius: '5px', fontSize: '12px' }}
                   >
                     <div className={classNames(Styles.day, today, memoDepth)} />
-                  </Whisper>
+                  </Tooltip>
                 );
               })}
             </div>
