@@ -9,7 +9,7 @@ import MineStoreContainer from '@/store/MineStoreContainer';
 import { delete_issue_gql } from '@/services/githubGraphQLApi';
 import { update_issue } from '@/services/githubApi';
 
-import MemoStyles from '../Memo.module.less';
+import Styles from '../Memo.module.less';
 
 export interface MemoCardProps {
   item: Record<string, any>;
@@ -29,7 +29,7 @@ const MemoCardMore = React.forwardRef(
     },
     ref: React.Ref<HTMLDivElement>,
   ) => (
-    <div ref={ref} {...rest}>
+    <div className={Styles.popover} ref={ref} {...rest}>
       <button type="button" onClick={() => onSelect('share')}>
         Share
       </button>
@@ -70,8 +70,8 @@ const MemoCard: React.FC<MemoCardProps> = ({ item, itemIndex }) => {
   };
 
   return (
-    <div className={MemoStyles.memo}>
-      <div className={MemoStyles.card}>
+    <div className={Styles.memo}>
+      <div className={Styles.card}>
         {isEdit ? (
           <RichEditor
             ref={editorRef}
@@ -110,11 +110,11 @@ const MemoCard: React.FC<MemoCardProps> = ({ item, itemIndex }) => {
           />
         ) : (
           <>
-            <div className={MemoStyles.header}>
-              <div className={MemoStyles.time}>{item.updated_at}</div>
+            <div className={Styles.header}>
+              <div className={Styles.time}>{item.updated_at}</div>
               <div>
                 <Popover
-                  placement="bottom"
+                  placement="bottomRight"
                   content={<MemoCardMore onSelect={handleSelectMenu} />}
                   trigger="hover"
                 >
@@ -124,7 +124,7 @@ const MemoCard: React.FC<MemoCardProps> = ({ item, itemIndex }) => {
                 </Popover>
               </div>
             </div>
-            <div className={MemoStyles.content}>
+            <div className={Styles.content}>
               <div dangerouslySetInnerHTML={{ __html: item.body }} />
             </div>
           </>
