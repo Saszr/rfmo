@@ -57,12 +57,19 @@ const getOpts = () => {
 
 interface EditorProps {
   initDoc?: string;
+  onSubmit?: (params: Record<string, any>) => void;
+  extraBtn?: React.ReactNode;
+  disableSubmit?: boolean;
 }
 
-const Editor: React.FC<EditorProps> = ({ initDoc }) => {
+// const Editor: React.FC<EditorProps> = React.forwardRef((props, ref: React.Ref<any>) => {
+const Editor = React.forwardRef((props: EditorProps, ref: React.Ref<any>) => {
+  const { initDoc, onSubmit, extraBtn, disableSubmit = false } = props;
+
   const viewRef = React.useRef(null);
   const [state, setState] = useProseMirror(getOpts());
   const [curInputValue, setCurInputValue] = React.useState('');
+  const [submitBtnDisabled, setSubmitBtnDisabled] = React.useState(true);
 
   const initEditor = useMemoizedFn(() => {
     const opts = getOpts();
@@ -78,8 +85,6 @@ const Editor: React.FC<EditorProps> = ({ initDoc }) => {
 
       const initState = EditorState.create(opts);
       setState(initState);
-
-      // if (initDoc) setState(state.apply(state.tr.replaceSelectionWith(newSchema.text(initDoc))));
     }
   });
 
@@ -92,16 +97,24 @@ const Editor: React.FC<EditorProps> = ({ initDoc }) => {
     const div = document.createElement('div');
     div.appendChild(fragment);
     setCurInputValue(div.innerHTML);
+
+    setSubmitBtnDisabled(div.innerHTML === '<p></p>');
   }, [state]);
 
-  const submit = () => {
-    create_issue(curInputValue).then(() => {
-      const opts = getOpts();
+  const handleSubmit = async () => {
+    const res = await create_issue(curInputValue);
+    const opts = getOpts();
+    const newState = EditorState.create(opts);
+    setState(newState);
 
-      const newState = EditorState.create(opts);
-      setState(newState);
-    });
+    if (onSubmit) onSubmit(res);
   };
+
+  React.useImperativeHandle(ref, () => {
+    return {
+      value: curInputValue,
+    };
+  });
 
   return (
     <div className={Styles['input-box']}>
@@ -132,11 +145,17 @@ const Editor: React.FC<EditorProps> = ({ initDoc }) => {
           </button>
         </div>
         <div className={Styles['pin-right']}>
-          <button onClick={submit}>发送</button>
+          {extraBtn}
+
+          {!disableSubmit && (
+            <button type="button" onClick={handleSubmit} disabled={submitBtnDisabled}>
+              发送
+            </button>
+          )}
         </div>
       </div>
     </div>
   );
-};
+});
 
 export default Editor;

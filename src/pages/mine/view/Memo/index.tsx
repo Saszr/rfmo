@@ -4,10 +4,8 @@ import { useMemoizedFn } from 'ahooks';
 import MainViewMenu from '@/pages/mine/components/MainViewMenu';
 import { get_list_issues } from '@/services/githubApi';
 import MineStoreContainer from '@/store/MineStoreContainer';
+import RichEditor from '@/pages/mine/components/RichEditor';
 import MemoCard from './MemoCard';
-import MemoEditor from './MemoEditor';
-
-import type { MemoCardProps } from './MemoCard';
 
 import Styles from '../view.module.less';
 import MemoStyles from './Memo.module.less';
@@ -43,7 +41,11 @@ const Memo = () => {
         <span>🔍</span>
       </div>
       <div className={Styles.input}>
-        <MemoEditor />
+        <RichEditor
+          onSubmit={(res) => {
+            setMemoList([res, ...memoList]);
+          }}
+        />
       </div>
 
       <div
@@ -51,8 +53,8 @@ const Memo = () => {
         className={MemoStyles.memos}
         style={{ height: `calc(100vh - ${memosTop}px)` }}
       >
-        {memoList.map((item: MemoCardProps['item']) => {
-          return <MemoCard key={item.id} item={item} />;
+        {memoList.map((item, index) => {
+          return <MemoCard key={item.id} itemIndex={index} item={item} />;
         })}
       </div>
     </>

@@ -79,3 +79,19 @@ export const get_list_issues = async () => {
   });
   return await octokitRequest(options);
 };
+
+export const update_issue = async (issue_number: string, curInputValue: string) => {
+  const rfmo = localStorage.getItem('rfmo')!;
+  const login = JSON.parse(rfmo).owner.login;
+
+  const options = endpoint('PATCH /repos/{owner}/{repo}/issues/{issue_number}', {
+    owner: login,
+    repo: 'rfmo-library',
+    issue_number,
+
+    data: JSON.stringify({
+      body: curInputValue,
+    }),
+  });
+  return await octokitRequest(options);
+};

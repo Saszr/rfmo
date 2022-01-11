@@ -3,18 +3,17 @@ import { MdOutlineMoreHoriz } from 'react-icons/md';
 import { Popover } from 'antd';
 import RichEditor from '@/pages/mine/components/RichEditor';
 import { useMutation } from '@apollo/client';
+import produce from 'immer';
 
 import MineStoreContainer from '@/store/MineStoreContainer';
 import { delete_issue_gql } from '@/services/githubGraphQLApi';
+import { update_issue } from '@/services/githubApi';
 
 import MemoStyles from '../Memo.module.less';
 
 export interface MemoCardProps {
-  item: {
-    updated_at: string;
-    body: string;
-    id: number;
-  };
+  item: Record<string, any>;
+  itemIndex: number;
 }
 
 const MemoCardMore = React.forwardRef(
@@ -44,10 +43,11 @@ const MemoCardMore = React.forwardRef(
   ),
 );
 
-const MemoCard: React.FC<MemoCardProps> = ({ item }) => {
+const MemoCard: React.FC<MemoCardProps> = ({ item, itemIndex }) => {
   const { memoList, setMemoList } = MineStoreContainer.usePicker(['memoList', 'setMemoList']);
 
   const [isEdit, setIsEdit] = React.useState(false);
+  const editorRef = React.useRef(null);
 
   const [delete_issue] = useMutation(delete_issue_gql);
 
@@ -64,13 +64,50 @@ const MemoCard: React.FC<MemoCardProps> = ({ item }) => {
   const handleSelectMenu = (key: string | undefined) => {
     if (key === 'edit') setIsEdit(true);
     if (key === 'delete') handleDelIssue(item);
+    if (key === 'share') {
+      console.log('share');
+    }
   };
 
   return (
     <div className={MemoStyles.memo}>
       <div className={MemoStyles.card}>
         {isEdit ? (
-          <RichEditor initDoc={item.body} />
+          <RichEditor
+            ref={editorRef}
+            initDoc={item.body}
+            disableSubmit={true}
+            extraBtn={
+              <>
+                <button
+                  type="button"
+                  style={{ marginRight: '6px' }}
+                  onClick={() => {
+                    setIsEdit(false);
+                  }}
+                >
+                  取消
+                </button>
+                <button
+                  type="button"
+                  onClick={async () => {
+                    const { number } = item;
+
+                    update_issue(number, editorRef.current?.value).then((res) => {
+                      const newMemoList = produce(memoList, (draftState) => {
+                        draftState[itemIndex] = res;
+                      });
+
+                      setMemoList(newMemoList);
+                      setIsEdit(false);
+                    });
+                  }}
+                >
+                  更新
+                </button>
+              </>
+            }
+          />
         ) : (
           <>
             <div className={MemoStyles.header}>
