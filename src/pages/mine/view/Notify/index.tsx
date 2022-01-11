@@ -1,6 +1,7 @@
 import React from 'react';
 
 import MainViewMenu from '@/pages/mine/components/MainViewMenu';
+import Loading from '../Loading';
 
 import Styles from '../view.module.less';
 
@@ -15,6 +16,8 @@ const Notify = () => {
 
         <span>🔍</span>
       </div>
+
+      <Loading />
     </div>
   );
 };
