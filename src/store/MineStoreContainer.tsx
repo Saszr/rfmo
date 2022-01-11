@@ -40,12 +40,17 @@ const MineStoreContainer = () => {
   const { asideDrawerIs, setAsideDrawerIs, asideDrawerVisible, setAsideDrawerVisible } =
     useAsideDrawerState();
 
+  const [memoList, setMemoList] = React.useState([]);
+
   return {
     asideDrawerIs,
     setAsideDrawerIs,
 
     asideDrawerVisible,
     setAsideDrawerVisible,
+
+    memoList,
+    setMemoList,
   };
 };
 
