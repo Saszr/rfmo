@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { VscGithubInverted } from 'react-icons/vsc';
+import { AiOutlineDatabase } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 
 import useLocalData from '@/hooks/useLocalData';
@@ -55,6 +56,10 @@ const Login = () => {
     }
   };
 
+  const indexedDBLogin = () => {
+    navigate('/mine', { replace: true });
+  };
+
   return (
     <Wrapper>
       <main className={Styles['login-main']}>
@@ -74,6 +79,17 @@ const Login = () => {
               <VscGithubInverted style={{ fontSize: '20px' }} />
             </span>
             Continue with Github Token
+          </button>
+
+          <button
+            className={Styles['login-button']}
+            onClick={indexedDBLogin}
+            style={{ marginTop: '20px' }}
+          >
+            <span style={{ display: 'flex', marginRight: '1rem' }}>
+              <AiOutlineDatabase style={{ fontSize: '20px' }} />
+            </span>
+            Continue with indexedDB
           </button>
         </div>
       </main>

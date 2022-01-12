@@ -2,10 +2,10 @@ import React from 'react';
 import { useMemoizedFn } from 'ahooks';
 
 import MainViewMenu from '@/pages/mine/components/MainViewMenu';
-import { get_list_issues } from '@/services/githubApi';
 import MineStoreContainer from '@/store/MineStoreContainer';
 import RichEditor from '@/pages/mine/components/RichEditor';
 import MemoCard from './MemoCard';
+import { db } from '@/store/db';
 
 import Styles from '../view.module.less';
 import MemoStyles from './Memo.module.less';
@@ -17,7 +17,7 @@ const Memo = () => {
   const [memosTop, setMemosTop] = React.useState(0);
 
   const initList = useMemoizedFn(async () => {
-    const res = await get_list_issues();
+    const res = await db.memo.orderBy('created_at').reverse().toArray();
     setMemoList(res);
   });
 

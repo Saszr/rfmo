@@ -2,12 +2,11 @@ import React from 'react';
 import { MdOutlineMoreHoriz } from 'react-icons/md';
 import { Popover } from 'antd';
 import RichEditor from '@/pages/mine/components/RichEditor';
-import { useMutation } from '@apollo/client';
 import produce from 'immer';
 
 import MineStoreContainer from '@/store/MineStoreContainer';
-import { delete_issue_gql } from '@/services/githubGraphQLApi';
-import { update_issue } from '@/services/githubApi';
+import { db } from '@/store/db';
+
 
 import Styles from '../Memo.module.less';
 
@@ -49,16 +48,13 @@ const MemoCard: React.FC<MemoCardProps> = ({ item, itemIndex }) => {
   const [isEdit, setIsEdit] = React.useState(false);
   const editorRef = React.useRef(null);
 
-  const [delete_issue] = useMutation(delete_issue_gql);
-
   const handleDelIssue = async (params: Record<string, any>) => {
     const { node_id } = params;
-    delete_issue({ variables: { node_id } }).then(() => {
-      const filterMemoList = memoList.filter((memoItem: Record<string, any>) => {
-        return memoItem.node_id !== node_id;
-      });
-      setMemoList(filterMemoList);
+    await db.memo.delete(node_id);
+    const filterMemoList = memoList.filter((memoItem: Record<string, any>) => {
+      return memoItem.node_id !== node_id;
     });
+    setMemoList(filterMemoList);
   };
 
   const handleSelectMenu = (key: string | undefined) => {
@@ -91,16 +87,18 @@ const MemoCard: React.FC<MemoCardProps> = ({ item, itemIndex }) => {
                 <button
                   type="button"
                   onClick={async () => {
-                    const { number } = item;
+                    const { node_id } = item;
+                    const value = editorRef.current?.value;
 
-                    update_issue(number, editorRef.current?.value).then((res) => {
-                      const newMemoList = produce(memoList, (draftState) => {
-                        draftState[itemIndex] = res;
-                      });
+                    await db.memo.update(node_id, { body: value });
 
-                      setMemoList(newMemoList);
-                      setIsEdit(false);
+                    const res = await db.memo.get(node_id);
+                    const newMemoList = produce(memoList, (draftState) => {
+                      draftState[itemIndex] = res!;
                     });
+
+                    setMemoList(newMemoList);
+                    setIsEdit(false);
                   }}
                 >
                   更新

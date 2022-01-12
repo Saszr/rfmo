@@ -9,13 +9,15 @@ import { baseKeymap, toggleMark } from 'prosemirror-commands';
 import { useProseMirror, ProseMirror } from 'use-prosemirror';
 import { EditorState } from 'prosemirror-state';
 import { useMemoizedFn } from 'ahooks';
+import dayjs from 'dayjs';
+import { nanoid } from 'nanoid';
 
 import type { Command } from 'prosemirror-commands';
 import type { MarkType } from 'prosemirror-model';
 import type { Transaction } from 'prosemirror-state';
 
 import { buildKeymap } from './keymap';
-import { create_issue } from '@/services/githubApi';
+import { db } from '@/store/db';
 
 import { MdFormatBold, MdFormatListBulleted, MdFormatListNumbered } from 'react-icons/md';
 
@@ -57,7 +59,7 @@ const getOpts = () => {
 
 interface EditorProps {
   initDoc?: string;
-  onSubmit?: (params: Record<string, any>) => void;
+  onSubmit?: (params: Record<string, any> | undefined) => void;
   extraBtn?: React.ReactNode;
   disableSubmit?: boolean;
 }
@@ -102,10 +104,18 @@ const Editor = React.forwardRef((props: EditorProps, ref: React.Ref<any>) => {
   }, [state]);
 
   const handleSubmit = async () => {
-    const res = await create_issue(curInputValue);
+    const node_id = await db.memo.add({
+      node_id: nanoid(),
+      body: curInputValue,
+      created_at: dayjs().format('YYYY-MM-DD HH:mm:ss'),
+      updated_at: dayjs().format('YYYY-MM-DD HH:mm:ss'),
+    });
+
     const opts = getOpts();
     const newState = EditorState.create(opts);
     setState(newState);
+
+    const res = await db.memo.get(node_id);
 
     if (onSubmit) onSubmit(res);
   };

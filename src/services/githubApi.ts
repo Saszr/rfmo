@@ -1,5 +1,4 @@
 import { endpoint } from '@octokit/endpoint';
-import { nanoid } from 'nanoid';
 import { encode as base64_encode } from 'js-base64';
 
 import octokitRequest from './octokitRequest';
@@ -35,62 +34,33 @@ export const create_user_repo = async () => {
   return await octokitRequest(options);
 };
 
+export const get_file_contents = async () => {
+  const rfmo = localStorage.getItem('rfmo')!;
+  const login = JSON.parse(rfmo).owner.login;
+
+  const options = endpoint('GET /repos/{owner}/{repo}/contents/{path}', {
+    owner: login,
+    repo: 'rfmo-library',
+    path: `rfmoDB.backup.json`,
+  });
+  return await octokitRequest(options);
+};
+
 export const update_file_contents = async (curInputValue: string) => {
   const rfmo = localStorage.getItem('rfmo')!;
   const login = JSON.parse(rfmo).owner.login;
 
+  const { sha } = await get_file_contents();
+
   const options = endpoint('PUT /repos/{owner}/{repo}/contents/{path}', {
     owner: login,
     repo: 'rfmo-library',
-    path: `notes/${nanoid()}.raw`,
+    path: `rfmoDB.backup.json`,
 
     data: JSON.stringify({
-      message: 'test rfmo app',
+      message: 'backup rfmo app',
+      sha,
       content: base64_encode(curInputValue),
-    }),
-  });
-  return await octokitRequest(options);
-};
-
-export const create_issue = async (curInputValue: string) => {
-  const rfmo = localStorage.getItem('rfmo')!;
-  const login = JSON.parse(rfmo).owner.login;
-
-  const options = endpoint('POST /repos/{owner}/{repo}/issues', {
-    owner: login,
-    repo: 'rfmo-library',
-
-    data: JSON.stringify({
-      title: 'note',
-      body: curInputValue,
-      labels: ['note'],
-    }),
-  });
-  return await octokitRequest(options);
-};
-
-export const get_list_issues = async () => {
-  const rfmo = localStorage.getItem('rfmo')!;
-  const login = JSON.parse(rfmo).owner.login;
-
-  const options = endpoint('GET /repos/{owner}/{repo}/issues', {
-    owner: login,
-    repo: 'rfmo-library',
-  });
-  return await octokitRequest(options);
-};
-
-export const update_issue = async (issue_number: string, curInputValue: string) => {
-  const rfmo = localStorage.getItem('rfmo')!;
-  const login = JSON.parse(rfmo).owner.login;
-
-  const options = endpoint('PATCH /repos/{owner}/{repo}/issues/{issue_number}', {
-    owner: login,
-    repo: 'rfmo-library',
-    issue_number,
-
-    data: JSON.stringify({
-      body: curInputValue,
     }),
   });
   return await octokitRequest(options);
