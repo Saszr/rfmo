@@ -6,7 +6,7 @@ import Sidebar from '@/pages/mine/components/Sidebar';
 const AsideContent = () => {
   return (
     <>
-      <h3>Sheng</h3>
+      <h3>Workspace</h3>
       <Stat />
       <Sidebar />
     </>

@@ -4,6 +4,7 @@ specifiers:
   '@octokit/endpoint': ^6.0.12
   '@octokit/types': ^6.34.0
   '@types/file-saver': ^2.0.5
+  '@types/lodash': ^4.14.178
   '@types/node': ^16.11.12
   '@types/prosemirror-commands': ^1.0.4
   '@types/prosemirror-history': ^1.0.3
@@ -92,6 +93,7 @@ dependencies:
 
 devDependencies:
   '@types/file-saver': 2.0.5
+  '@types/lodash': 4.14.178
   '@types/node': registry.npmmirror.com/@types/node/16.11.12
   '@types/prosemirror-commands': 1.0.4
   '@types/prosemirror-history': 1.0.3
@@ -1749,6 +1751,10 @@ packages:
 
   /@types/json5/0.0.29:
     resolution: {integrity: sha1-7ihweulOEdK4J7y+UnC86n8+ce4=}
+    dev: true
+
+  /@types/lodash/4.14.178:
+    resolution: {integrity: sha512-0d5Wd09ItQWH1qFbEyQ7oTQ3GZrMfth5JkbN3EvTKLXcHLRDSXeLnlvlOn0wvxVIwK5o2M8JzP/OWz7T3NRsbw==}
     dev: true
 
   /@types/minimatch/3.0.5:

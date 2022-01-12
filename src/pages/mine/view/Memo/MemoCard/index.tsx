@@ -3,10 +3,10 @@ import { MdOutlineMoreHoriz } from 'react-icons/md';
 import { Popover } from 'antd';
 import RichEditor from '@/pages/mine/components/RichEditor';
 import produce from 'immer';
+import dayjs from 'dayjs';
 
 import MineStoreContainer from '@/store/MineStoreContainer';
 import { db } from '@/store/db';
-
 
 import Styles from '../Memo.module.less';
 
@@ -46,9 +46,9 @@ const MemoCard: React.FC<MemoCardProps> = ({ item, itemIndex }) => {
   const { memoList, setMemoList } = MineStoreContainer.usePicker(['memoList', 'setMemoList']);
 
   const [isEdit, setIsEdit] = React.useState(false);
-  const editorRef = React.useRef(null);
+  const editorRef = React.useRef<Record<string, any>>(null);
 
-  const handleDelIssue = async (params: Record<string, any>) => {
+  const handleDelItem = async (params: Record<string, any>) => {
     const { node_id } = params;
     await db.memo.delete(node_id);
     const filterMemoList = memoList.filter((memoItem: Record<string, any>) => {
@@ -57,11 +57,29 @@ const MemoCard: React.FC<MemoCardProps> = ({ item, itemIndex }) => {
     setMemoList(filterMemoList);
   };
 
+  const handleUpdateItem = async () => {
+    const { node_id } = item;
+    const value = editorRef.current!.value;
+
+    await db.memo.update(node_id, {
+      body: value,
+      updated_at: dayjs().format('YYYY-MM-DD HH:mm:ss'),
+    });
+
+    const res = await db.memo.get(node_id);
+    const newMemoList = produce(memoList, (draftState) => {
+      draftState[itemIndex] = res!;
+    });
+
+    setMemoList(newMemoList);
+    setIsEdit(false);
+  };
+
   const handleSelectMenu = (key: string | undefined) => {
     if (key === 'edit') setIsEdit(true);
-    if (key === 'delete') handleDelIssue(item);
+    if (key === 'delete') handleDelItem(item);
     if (key === 'share') {
-      console.log('share');
+      return;
     }
   };
 
@@ -86,19 +104,8 @@ const MemoCard: React.FC<MemoCardProps> = ({ item, itemIndex }) => {
                 </button>
                 <button
                   type="button"
-                  onClick={async () => {
-                    const { node_id } = item;
-                    const value = editorRef.current?.value;
-
-                    await db.memo.update(node_id, { body: value });
-
-                    const res = await db.memo.get(node_id);
-                    const newMemoList = produce(memoList, (draftState) => {
-                      draftState[itemIndex] = res!;
-                    });
-
-                    setMemoList(newMemoList);
-                    setIsEdit(false);
+                  onClick={() => {
+                    handleUpdateItem();
                   }}
                 >
                   更新

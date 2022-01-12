@@ -5,32 +5,16 @@ import { Tooltip } from 'antd';
 
 import Styles from './HeatGridChart.module.less';
 
-const getStat = () => {
-  return new Promise((resolve) => {
-    const data = {
-      daily_memo_count: {
-        '2021/11/23': 1,
-        '2021/11/13': 1,
-        '2021/12/03': 10,
-      },
-    };
-
-    setTimeout(() => {
-      resolve(data);
-    }, 300);
-  });
-};
-
 interface HeatGridStatProps {
-  daily_memo_count: Record<string, any>;
+  data?: Record<string, any>;
 }
 
-const HeatGridChart = () => {
+const HeatGridChart: React.FC<HeatGridStatProps> = (props) => {
+  const { data = {} } = props;
+
   const [heatGridDayArr, setHeatGridDayArr] = React.useState<string[][]>([]);
   const [heatGridMonthArr, setHeatGridMonthArr] = React.useState<string[]>([]);
-  const [heatGridStat, setHeatGridStat] = React.useState<HeatGridStatProps>({
-    daily_memo_count: {},
-  });
+  const [heatGridStat, setHeatGridStat] = React.useState<Record<string, number>>({});
 
   React.useEffect(() => {
     const endOfCurrentWeek = dayjs().endOf('week').format('YYYY/MM/DD');
@@ -66,10 +50,8 @@ const HeatGridChart = () => {
   }, []);
 
   React.useEffect(() => {
-    getStat().then((res) => {
-      setHeatGridStat(res);
-    });
-  }, []);
+    if (data) setHeatGridStat(data);
+  }, [data]);
 
   return (
     <>
@@ -82,7 +64,7 @@ const HeatGridChart = () => {
                 const today = day === dayjs().format('YYYY/MM/DD') ? Styles.today : '';
 
                 let curMemoCount = 0;
-                const { daily_memo_count } = heatGridStat;
+                const daily_memo_count = heatGridStat;
                 if (Object.keys(daily_memo_count).includes(day)) {
                   curMemoCount = daily_memo_count[day];
                 }

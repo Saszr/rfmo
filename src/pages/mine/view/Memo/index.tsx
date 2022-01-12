@@ -43,7 +43,7 @@ const Memo = () => {
       <div className={Styles.input}>
         <RichEditor
           onSubmit={(res) => {
-            setMemoList([res, ...memoList]);
+            setMemoList([res!, ...memoList]);
           }}
         />
       </div>
