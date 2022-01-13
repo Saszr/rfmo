@@ -46,8 +46,8 @@ const Settings = () => {
 
       const res = await get_user_repo().catch(async (err) => {
         if (err.message === 'Not Found') {
-          await create_user_repo();
-          setOwner(res);
+          const cRes = await create_user_repo();
+          setOwner(cRes);
           exportToGithub();
         }
       });
