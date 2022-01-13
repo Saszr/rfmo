@@ -5,7 +5,7 @@
 > fork from [flomo - 浮墨](https://flomoapp.com/)
 
 - vite + react + ts 构建
-- 功能基本保持相同
+- ~~功能基本保持相同~~
 - 数据方案 IndexedDB + 文件形式导入导出 + github 仓库云同步
 
 ## Instructions
@@ -22,10 +22,9 @@
 
 ## Todo
 
-还有 🤏 亿点细节
+~~不准备做图片信息的输入展示~~
 
-- [ ] 每日回顾
-- [ ] 随机漫步
+🤏 亿点功能和优化
 
 ## License
 
