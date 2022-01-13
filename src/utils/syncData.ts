@@ -3,7 +3,7 @@ import { decode as base64_decode } from 'js-base64';
 import { exportFile, exportFileInfo, importFileInfo } from '@/store/db';
 import { update_file_contents, get_file_contents } from '@/services/githubApi';
 
-const exportToLocal = async () => {
+const exportToGithub = async () => {
   const res = await exportFileInfo();
   const reader = new FileReader();
   reader.readAsText(res, 'utf-8');
@@ -28,4 +28,4 @@ const importFromFile = (fileInfo: File) => {
   importFileInfo(fileInfo);
 };
 
-export { exportToLocal, importFromGithub, importFromFile };
+export { exportToGithub, importFromGithub, importFromFile, exportFile };

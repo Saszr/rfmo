@@ -18,11 +18,6 @@ export const get_user_repo = async () => {
   return await octokitRequest(options);
 };
 
-export const get_user_repos = async () => {
-  const options = endpoint('GET /user/repos', {});
-  return await octokitRequest(options);
-};
-
 export const create_user_repo = async () => {
   const options = endpoint('POST /user/repos', {
     data: JSON.stringify({
@@ -36,7 +31,7 @@ export const create_user_repo = async () => {
 
 export const get_file_contents = async () => {
   const rfmo = localStorage.getItem('rfmo')!;
-  const login = JSON.parse(rfmo).owner.login;
+  const login = JSON.parse(rfmo).github.owner.login;
 
   const options = endpoint('GET /repos/{owner}/{repo}/contents/{path}', {
     owner: login,
@@ -48,20 +43,27 @@ export const get_file_contents = async () => {
 
 export const update_file_contents = async (curInputValue: string) => {
   const rfmo = localStorage.getItem('rfmo')!;
-  const login = JSON.parse(rfmo).owner.login;
+  const login = JSON.parse(rfmo).github.owner.login;
 
-  const { sha } = await get_file_contents();
+  const res = await get_file_contents().catch(() => {});
+
+  const parameter: {
+    message: string;
+    content: string;
+    sha?: string;
+  } = {
+    message: 'backup rfmo app',
+    content: base64_encode(curInputValue),
+  };
+
+  if (res?.sha) parameter.sha = res.sha;
 
   const options = endpoint('PUT /repos/{owner}/{repo}/contents/{path}', {
     owner: login,
     repo: 'rfmo-library',
     path: `rfmoDB.backup.json`,
 
-    data: JSON.stringify({
-      message: 'backup rfmo app',
-      sha,
-      content: base64_encode(curInputValue),
-    }),
+    data: JSON.stringify(parameter),
   });
   return await octokitRequest(options);
 };

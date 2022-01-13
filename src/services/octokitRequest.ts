@@ -8,7 +8,7 @@ interface RequestMethod {
 
 const octokitRequest: RequestMethod = (options) => {
   const rfmo = localStorage.getItem('rfmo')!;
-  const access_token = JSON.parse(rfmo).token;
+  const access_token = JSON.parse(rfmo).github.token;
 
   if (access_token) {
     const baseHeaders = {
