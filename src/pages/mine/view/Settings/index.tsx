@@ -24,7 +24,7 @@ const Settings = () => {
     importFromFileRef.current!.click();
   };
 
-  const handleLinkGithub = async () => {
+  const handleLinkGithub = async (func: () => void) => {
     if (inputGithubTokenRef.current) {
       const token = inputGithubTokenRef.current.value;
       const curLocalData = produce(localData, (draftState: { github: { token: string } }) => {
@@ -48,11 +48,11 @@ const Settings = () => {
         if (err.message === 'Not Found') {
           const cRes = await create_user_repo();
           setOwner(cRes);
-          exportToGithub();
+          func();
         }
       });
       setOwner(res);
-      exportToGithub();
+      func();
     }
   };
 
@@ -76,7 +76,7 @@ const Settings = () => {
           <button
             style={{ marginRight: '20px' }}
             onClick={() => {
-              handleLinkGithub();
+              handleLinkGithub(exportToGithub);
             }}
           >
             <span style={{ display: 'flex', marginRight: '1rem' }}>
@@ -86,7 +86,7 @@ const Settings = () => {
           </button>
           <button
             onClick={() => {
-              importFromGithub();
+              handleLinkGithub(importFromGithub);
             }}
           >
             <span style={{ display: 'flex', marginRight: '1rem' }}>
