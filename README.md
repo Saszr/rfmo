@@ -18,7 +18,7 @@
 
 ## Preview
 
-![~](https://github.com/Saszr/rfmo/blob/master/docs/images/01_show.png)
+![~](https://github.com/Saszr/rfmo/blob/main/docs/images/01_show.png)
 
 ## Todo
 
