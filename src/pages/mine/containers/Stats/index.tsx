@@ -5,7 +5,7 @@ import { isUndefined } from 'lodash';
 
 import { db } from '@/store/db';
 import MineStoreContainer from '@/store/MineStoreContainer';
-import HeatGridChart from './HeatGridChart';
+import HeatGridChart from '../../components/HeatGridChart';
 
 dayjs.extend(isBetween);
 

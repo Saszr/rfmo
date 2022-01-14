@@ -27,6 +27,7 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
+      "@mine/*": ["./src/pages/mine/*"]
     }
   },
   "include": ["./src", "vite.config.ts"]

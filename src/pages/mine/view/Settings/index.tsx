@@ -5,7 +5,7 @@ import produce from 'immer';
 import { exportToGithub, importFromGithub, importFromFile, exportFile } from '@/utils/syncData';
 import { get_user_repo, create_user_repo } from '@/services/githubApi';
 import useLocalData from '@/hooks/useLocalData';
-import MainViewMenu from '@/pages/mine/components/MainViewMenu';
+import ViewTopBar from '@mine/containers/ViewTopBar';
 
 import Styles from '../view.module.less';
 import SettingsStyles from './Settings.module.less';
@@ -59,12 +59,7 @@ const Settings = () => {
 
   return (
     <>
-      <div className={Styles.topBar}>
-        <div className={Styles.left}>
-          <MainViewMenu />
-          <span>Settings</span>
-        </div>
-      </div>
+      <ViewTopBar title="Settings" />
 
       <div className={Styles.block}>
         <h3>数据同步（Github）</h3>

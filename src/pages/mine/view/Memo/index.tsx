@@ -1,9 +1,9 @@
 import React from 'react';
 import { useMemoizedFn } from 'ahooks';
 
-import MainViewMenu from '@/pages/mine/components/MainViewMenu';
 import MineStoreContainer from '@/store/MineStoreContainer';
 import RichEditor from '@/pages/mine/components/RichEditor';
+import ViewTopBar from '@mine/containers/ViewTopBar';
 import MemoCard from './MemoCard';
 import { db } from '@/store/db';
 
@@ -32,14 +32,8 @@ const Memo = () => {
 
   return (
     <>
-      <div className={Styles.topBar}>
-        <div className={Styles.left}>
-          <MainViewMenu />
-          <span>MEMO</span>
-        </div>
+      <ViewTopBar title="MEMO" search={true} />
 
-        <span>🔍</span>
-      </div>
       <div className={Styles.input}>
         <RichEditor
           onSubmit={(res) => {

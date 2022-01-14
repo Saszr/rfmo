@@ -2,7 +2,7 @@ import React from 'react';
 import { RiSettings6Line } from 'react-icons/ri';
 import { useNavigateSearch } from '@/hooks/useRouterDom';
 
-import Stat from '@/pages/mine/components/Stat';
+import Stats from '@/pages/mine/containers/Stats';
 import Sidebar from '@/pages/mine/components/Sidebar';
 
 import Styles from './WrapperAside.module.less';
@@ -32,7 +32,7 @@ const AsideContent = () => {
   return (
     <>
       <HeaderUser />
-      <Stat />
+      <Stats />
       <Sidebar />
     </>
   );
