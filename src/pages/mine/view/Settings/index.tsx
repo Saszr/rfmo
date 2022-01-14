@@ -5,6 +5,7 @@ import produce from 'immer';
 import { exportToGithub, importFromGithub, importFromFile, exportFile } from '@/utils/syncData';
 import { get_user_repo, create_user_repo } from '@/services/githubApi';
 import useLocalData from '@/hooks/useLocalData';
+import MainViewMenu from '@/pages/mine/components/MainViewMenu';
 
 import Styles from '../view.module.less';
 import SettingsStyles from './Settings.module.less';
@@ -60,6 +61,7 @@ const Settings = () => {
     <>
       <div className={Styles.topBar}>
         <div className={Styles.left}>
+          <MainViewMenu />
           <span>Settings</span>
         </div>
       </div>
