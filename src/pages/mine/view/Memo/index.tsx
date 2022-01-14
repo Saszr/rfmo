@@ -48,7 +48,7 @@ const Memo = () => {
         style={{ height: `calc(100vh - ${memosTop}px)` }}
       >
         {memoList.map((item, index) => {
-          return <MemoCard key={item.id} itemIndex={index} item={item} />;
+          return <MemoCard key={item.node_id} itemIndex={index} item={item} />;
         })}
       </div>
     </>
