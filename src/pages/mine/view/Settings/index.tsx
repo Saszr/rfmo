@@ -83,7 +83,7 @@ const Settings = () => {
           </button>
           <button
             onClick={() => {
-              handleLinkGithub(importFromGithub);
+              importFromGithub();
             }}
           >
             <span style={{ display: 'flex', marginRight: '1rem' }}>

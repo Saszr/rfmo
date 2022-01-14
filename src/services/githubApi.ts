@@ -29,14 +29,33 @@ export const create_user_repo = async () => {
   return await octokitRequest(options);
 };
 
+export const get_backup_file_sha = async () => {
+  const rfmo = localStorage.getItem('rfmo')!;
+  const login = JSON.parse(rfmo).github.owner.login;
+
+  const treeOptions = endpoint('GET /repos/{owner}/{repo}/git/trees/{tree_sha}', {
+    owner: login,
+    repo: 'rfmo-library',
+    tree_sha: 'HEAD',
+  });
+  const files_tree = await octokitRequest(treeOptions);
+  const backup_file = files_tree.tree.filter((item: { path: string }) => {
+    return item.path === 'rfmoDB.backup.json';
+  })[0];
+
+  return backup_file.sha;
+};
+
 export const get_file_contents = async () => {
   const rfmo = localStorage.getItem('rfmo')!;
   const login = JSON.parse(rfmo).github.owner.login;
 
-  const options = endpoint('GET /repos/{owner}/{repo}/contents/{path}', {
+  const file_sha = await get_backup_file_sha();
+
+  const options = endpoint('GET /repos/{owner}/{repo}/git/blobs/{file_sha}', {
     owner: login,
     repo: 'rfmo-library',
-    path: `rfmoDB.backup.json`,
+    file_sha,
   });
   return await octokitRequest(options);
 };
@@ -45,7 +64,7 @@ export const update_file_contents = async (curInputValue: string) => {
   const rfmo = localStorage.getItem('rfmo')!;
   const login = JSON.parse(rfmo).github.owner.login;
 
-  const res = await get_file_contents().catch(() => {});
+  const file_sha = await get_backup_file_sha().catch(() => {});
 
   const parameter: {
     message: string;
@@ -56,7 +75,7 @@ export const update_file_contents = async (curInputValue: string) => {
     content: base64_encode(curInputValue),
   };
 
-  if (res?.sha) parameter.sha = res.sha;
+  if (file_sha) parameter.sha = file_sha;
 
   const options = endpoint('PUT /repos/{owner}/{repo}/contents/{path}', {
     owner: login,
