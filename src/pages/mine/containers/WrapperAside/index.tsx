@@ -1,10 +1,8 @@
 import React from 'react';
-import { useTransition, animated, config } from 'react-spring';
 import { useSize } from 'ahooks';
 
 import MineStoreContainer from '@/store/MineStoreContainer';
 import Drawer from '@/components/Drawer';
-
 import AsideContent from './AsideContent';
 
 import Styles from './WrapperAside.module.less';
@@ -56,38 +54,7 @@ const AsideDrawer = () => {
 const WrapperAside = () => {
   const { asideDrawerIs } = MineStoreContainer.usePicker(['asideDrawerIs']);
 
-  const transitions = useTransition(asideDrawerIs, {
-    config: config.stiff,
-    from: { opacity: 0 },
-    enter: { opacity: 1 },
-    leave: { opacity: 0 },
-  });
-
-  return (
-    <>
-      {transitions(({ opacity }, item) =>
-        item === null ? (
-          ''
-        ) : item ? (
-          <animated.div
-            style={{
-              opacity,
-            }}
-          >
-            <AsideDrawer />
-          </animated.div>
-        ) : (
-          <animated.div
-            style={{
-              opacity,
-            }}
-          >
-            <AsideBasic />
-          </animated.div>
-        ),
-      )}
-    </>
-  );
+  return <>{asideDrawerIs ? <AsideDrawer /> : <AsideBasic />}</>;
 };
 
 export default WrapperAside;
