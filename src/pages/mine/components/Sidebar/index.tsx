@@ -1,12 +1,16 @@
 import React from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { useNavigateSearch } from '@/hooks/useRouterDom';
 
-import menuList from '@/pages/mine/containers/WrapperAside/menuList';
+import { useNavigateSearch } from '@/hooks/useRouterDom';
+import type { menuListProps } from '@mine/containers/WrapperAside/menuList';
 
 import Styles from './Sidebar.module.less';
 
-const Sidebar = () => {
+interface SidebarProps {
+  menuList: menuListProps[];
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ menuList }) => {
   const navigateSearch = useNavigateSearch();
   const [searchParams] = useSearchParams();
 

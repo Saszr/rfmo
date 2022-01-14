@@ -1,9 +1,10 @@
 import React from 'react';
 import { RiSettings6Line } from 'react-icons/ri';
-import { useNavigateSearch } from '@/hooks/useRouterDom';
 
-import Stats from '@/pages/mine/containers/Stats';
-import Sidebar from '@/pages/mine/components/Sidebar';
+import { useNavigateSearch } from '@/hooks/useRouterDom';
+import Stats from '@mine/containers/Stats';
+import Sidebar from '@mine/components/Sidebar';
+import menuList from './menuList';
 
 import Styles from './WrapperAside.module.less';
 
@@ -33,7 +34,7 @@ const AsideContent = () => {
     <>
       <HeaderUser />
       <Stats />
-      <Sidebar />
+      <Sidebar menuList={menuList} />
     </>
   );
 };

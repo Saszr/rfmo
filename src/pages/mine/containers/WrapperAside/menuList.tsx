@@ -4,7 +4,13 @@ import { CgToday } from 'react-icons/cg';
 import { MdToday } from 'react-icons/md';
 import { BsFillSignpost2Fill } from 'react-icons/bs';
 
-const menuList = [
+export interface menuListProps {
+  name: string;
+  desc: string;
+  icon: React.ReactNode;
+}
+
+const menuList: menuListProps[] = [
   {
     name: '',
     desc: 'MEMO',
