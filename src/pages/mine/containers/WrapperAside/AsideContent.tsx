@@ -1,5 +1,6 @@
 import React from 'react';
 import { RiSettings6Line } from 'react-icons/ri';
+import { VscGithubInverted } from 'react-icons/vsc';
 
 import { useNavigateSearch } from '@/hooks/useRouterDom';
 import Stats from '@mine/containers/Stats';
@@ -15,6 +16,13 @@ const HeaderUser = () => {
     <div className={Styles['header-user']}>
       <span>Workspace</span>
       <div className={Styles.icons}>
+        <span
+          onClick={() => {
+            window.open('https://github.com/Saszr/rfmo', '_blank');
+          }}
+        >
+          <VscGithubInverted style={{ fontSize: '18px', color: '#9e9e9e' }} />
+        </span>
         <span
           onClick={() => {
             navigateSearch('/mine', {
