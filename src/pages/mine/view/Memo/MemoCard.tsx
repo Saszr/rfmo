@@ -117,11 +117,11 @@ const MemoCard: React.FC<MemoCardProps> = ({ item, itemIndex }) => {
           <>
             <div className={Styles.header}>
               <div className={Styles.time}>{item.updated_at}</div>
-              <div>
+              <div style={{ cursor: 'pointer' }}>
                 <Popover
                   placement="bottomRight"
                   content={<MemoCardMore onSelect={handleSelectMenu} />}
-                  trigger="hover"
+                  trigger="click"
                 >
                   <div>
                     <MdOutlineMoreHoriz />
