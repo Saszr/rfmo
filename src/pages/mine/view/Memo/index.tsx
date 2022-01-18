@@ -1,5 +1,6 @@
 import React from 'react';
 import { useMemoizedFn } from 'ahooks';
+import { debounce } from 'lodash';
 
 import MineStoreContainer from '@/store/MineStoreContainer';
 import RichEditor from '@/pages/mine/components/RichEditor';
@@ -16,6 +17,13 @@ const Memo = () => {
   const memosRef = React.useRef<HTMLDivElement>(null);
   const [memosTop, setMemosTop] = React.useState(0);
 
+  const listRef = React.useRef({
+    curPage: 1,
+    pageSize: 10,
+  });
+
+  const [listData, setListData] = React.useState<Record<string, any>[]>([]);
+
   const initList = useMemoizedFn(async () => {
     const res = await db.memo.orderBy('created_at').reverse().toArray();
     setMemoList(res);
@@ -29,6 +37,22 @@ const Memo = () => {
 
     initList();
   }, [initList]);
+
+  React.useEffect(() => {
+    const data = memoList.slice(0, 30);
+    setListData(data);
+  }, [memoList]);
+
+  const handleListScroll: React.UIEventHandler<HTMLDivElement> = (event) => {
+    const { scrollTop, scrollHeight, clientHeight } = event.target as HTMLDivElement;
+
+    if (scrollHeight - scrollTop < clientHeight + 30) {
+      listRef.current.curPage += 1;
+      const { curPage, pageSize } = listRef.current;
+      const data = memoList.slice(0, curPage * pageSize);
+      setListData(data);
+    }
+  };
 
   return (
     <>
@@ -45,9 +69,10 @@ const Memo = () => {
       <div
         ref={memosRef}
         className={MemoStyles.memos}
-        style={{ height: `calc(100vh - ${memosTop}px)` }}
+        style={{ height: `calc(100vh - ${memosTop}px - 20px)` }}
+        onScrollCapture={debounce(handleListScroll, 400)}
       >
-        {memoList.map((item, index) => {
+        {listData.map((item, index) => {
           return <MemoCard key={item.node_id} itemIndex={index} item={item} />;
         })}
       </div>
