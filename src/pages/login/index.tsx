@@ -24,7 +24,7 @@ const Login = () => {
     <Wrapper>
       <main className={Styles['login-main']}>
         <div className={Styles['login-title']}>
-          <h1>Login to Rfmo</h1>
+          <h1>Login to rFmo</h1>
         </div>
         <div className={Styles['login-form']}>
           <button
