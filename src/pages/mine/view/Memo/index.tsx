@@ -1,11 +1,10 @@
 import React from 'react';
 import { useMemoizedFn } from 'ahooks';
-import { debounce } from 'lodash';
 
 import MineStoreContainer from '@/store/MineStoreContainer';
 import RichEditor from '@/pages/mine/components/RichEditor';
 import ViewTopBar from '@mine/containers/ViewTopBar';
-import MemoCard from './MemoCard';
+import MemoList from './MemoList';
 import { db } from '@/store/db';
 
 import Styles from '../view.module.less';
@@ -13,46 +12,17 @@ import MemoStyles from './Memo.module.less';
 
 const Memo = () => {
   const { memoList, setMemoList } = MineStoreContainer.usePicker(['memoList', 'setMemoList']);
-
-  const memosRef = React.useRef<HTMLDivElement>(null);
-  const [memosTop, setMemosTop] = React.useState(0);
-
-  const listRef = React.useRef({
-    curPage: 1,
-    pageSize: 10,
-  });
-
-  const [listData, setListData] = React.useState<Record<string, any>[]>([]);
+  const [listRender, setListRender] = React.useState(false);
 
   const initList = useMemoizedFn(async () => {
     const res = await db.memo.orderBy('created_at').reverse().toArray();
     setMemoList(res);
+    setListRender(true);
   });
 
   React.useEffect(() => {
-    if (memosRef.current) {
-      const { top } = memosRef.current.getBoundingClientRect();
-      setMemosTop(top);
-    }
-
     initList();
   }, [initList]);
-
-  React.useEffect(() => {
-    const data = memoList.slice(0, 30);
-    setListData(data);
-  }, [memoList]);
-
-  const handleListScroll: React.UIEventHandler<HTMLDivElement> = (event) => {
-    const { scrollTop, scrollHeight, clientHeight } = event.target as HTMLDivElement;
-
-    if (scrollHeight - scrollTop < clientHeight + 30) {
-      listRef.current.curPage += 1;
-      const { curPage, pageSize } = listRef.current;
-      const data = memoList.slice(0, curPage * pageSize);
-      setListData(data);
-    }
-  };
 
   return (
     <>
@@ -66,16 +36,15 @@ const Memo = () => {
         />
       </div>
 
-      <div
-        ref={memosRef}
-        className={MemoStyles.memos}
-        style={{ height: `calc(100vh - ${memosTop}px - 20px)` }}
-        onScrollCapture={debounce(handleListScroll, 400)}
-      >
-        {listData.map((item, index) => {
-          return <MemoCard key={item.node_id} itemIndex={index} item={item} />;
-        })}
-      </div>
+      {listRender ? (
+        <MemoList />
+      ) : (
+        <div className={MemoStyles.memos}>
+          <div className={MemoStyles['status-text-container']}>
+            <p className={MemoStyles['status-text']}>薛定谔的数据～加载中</p>
+          </div>
+        </div>
+      )}
     </>
   );
 };

@@ -13,7 +13,11 @@ interface handleSearchAllProps {
 }
 
 const handleSearchAll = async ({ searchTargetValue, setMemoList }: handleSearchAllProps) => {
-  const res = await db.memo.filter((item) => item.body.includes(searchTargetValue)).toArray();
+  const res = await db.memo
+    .orderBy('created_at')
+    .reverse()
+    .filter((item) => item.body.includes(searchTargetValue))
+    .toArray();
 
   setMemoList(res);
 };

@@ -8,7 +8,7 @@ import dayjs from 'dayjs';
 import MineStoreContainer from '@/store/MineStoreContainer';
 import { db } from '@/store/db';
 
-import Styles from '../Memo.module.less';
+import Styles from './Memo.module.less';
 
 export interface MemoCardProps {
   item: Record<string, any>;
