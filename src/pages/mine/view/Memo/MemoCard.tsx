@@ -30,13 +30,13 @@ const MemoCardMore = React.forwardRef(
   ) => (
     <div className={Styles.popover} ref={ref} {...rest}>
       <button type="button" onClick={() => onSelect('share')}>
-        Share
+        分享
       </button>
       <button type="button" onClick={() => onSelect('edit')}>
-        Edit
+        编辑
       </button>
       <button type="button" onClick={() => onSelect('delete')}>
-        Delete
+        删除
       </button>
     </div>
   ),
@@ -122,6 +122,8 @@ const MemoCard: React.FC<MemoCardProps> = ({ item, itemIndex }) => {
                   placement="bottomRight"
                   content={<MemoCardMore onSelect={handleSelectMenu} />}
                   trigger="click"
+                  overlayInnerStyle={{ borderRadius: '8px' }}
+                  overlayClassName={Styles['ant-popover']}
                 >
                   <div>
                     <MdOutlineMoreHoriz />

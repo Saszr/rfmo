@@ -58,16 +58,26 @@
 }
 
 .popover {
-  button {
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+
+  & > button {
     color: #7d7d7d;
     display: block;
     border: 0;
     background-color: #ffffff;
     cursor: pointer;
-    padding: 10px;
+    padding: 6px;
   }
 
-  button:hover {
+  & > button:hover {
     color: #55bb8e;
+  }
+}
+
+.ant-popover {
+  :global(.ant-popover-inner-content) {
+    padding: 4px;
   }
 }
