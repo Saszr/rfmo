@@ -7,6 +7,8 @@ import dayjs from 'dayjs';
 
 import MineStoreContainer from '@/store/MineStoreContainer';
 import { db } from '@/store/db';
+import Dialog from '@/components/Dialog';
+import ShareCard from './ShareCard';
 
 import Styles from './Memo.module.less';
 
@@ -48,6 +50,8 @@ const MemoCard: React.FC<MemoCardProps> = ({ item, itemIndex }) => {
   const [isEdit, setIsEdit] = React.useState(false);
   const editorRef = React.useRef<Record<string, any>>(null);
 
+  const [popoverVisible, setPopoverVisible] = React.useState(false);
+
   const handleDelItem = async (params: Record<string, any>) => {
     const { node_id } = params;
     await db.memo.delete(node_id);
@@ -79,8 +83,17 @@ const MemoCard: React.FC<MemoCardProps> = ({ item, itemIndex }) => {
     if (key === 'edit') setIsEdit(true);
     if (key === 'delete') handleDelItem(item);
     if (key === 'share') {
-      return;
+      setPopoverVisible(false);
+
+      Dialog.render({
+        title: '分享 rFmo 图片',
+        content: <ShareCard item={item} />,
+      });
     }
+  };
+
+  const handlePopoverVisibleChange = (visible: boolean) => {
+    setPopoverVisible(visible);
   };
 
   return (
@@ -124,6 +137,8 @@ const MemoCard: React.FC<MemoCardProps> = ({ item, itemIndex }) => {
                   trigger="click"
                   overlayInnerStyle={{ borderRadius: '8px' }}
                   overlayClassName={Styles['ant-popover']}
+                  visible={popoverVisible}
+                  onVisibleChange={handlePopoverVisibleChange}
                 >
                   <div>
                     <MdOutlineMoreHoriz />

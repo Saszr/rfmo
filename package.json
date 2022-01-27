@@ -19,6 +19,7 @@
     "dexie-react-hooks": "^1.1.1",
     "file-saver": "^2.0.5",
     "heo": "^1.4.0",
+    "html2canvas": "^1.4.1",
     "immer": "^9.0.7",
     "js-base64": "^3.7.2",
     "lodash": "^4.17.21",
