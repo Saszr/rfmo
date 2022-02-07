@@ -12,10 +12,13 @@
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
 
-    :global(.ProseMirror) {
+    :global(.ProseMirrorContainer) {
       min-height: 14px;
       max-height: calc(50vh);
       overflow-y: scroll;
+    }
+
+    :global(.ProseMirror) {
       word-wrap: break-word;
       white-space: pre-wrap;
       font-variant-ligatures: none;

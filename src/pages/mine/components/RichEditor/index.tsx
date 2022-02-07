@@ -129,7 +129,7 @@ const Editor = React.forwardRef((props: EditorProps, ref: React.Ref<any>) => {
   return (
     <div className={Styles['input-box']}>
       <div className={Styles['editor-content']}>
-        <ProseMirror ref={viewRef} className="ProseMirror" state={state} onChange={setState} />
+        <ProseMirror ref={viewRef} className="ProseMirrorContainer" state={state} onChange={setState} />
       </div>
       <div className={Styles['editor-menu-bar']}>
         <div className={Styles['pin-left']}>
