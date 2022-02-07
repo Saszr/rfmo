@@ -35,7 +35,10 @@ const ShareCard: React.FC<ShareCardProps> = (props) => {
       width: shareCardDom.clientWidth,
     });
 
-    shareCardDom.parentNode!.replaceChild(canvas, shareCardDom);
+    const image = new Image(shareCardDom.clientWidth, shareCardDom.clientHeight);
+    image.src = canvas.toDataURL('image/png');
+
+    shareCardDom.parentNode!.replaceChild(image, shareCardDom);
   };
 
   React.useEffect(() => {
