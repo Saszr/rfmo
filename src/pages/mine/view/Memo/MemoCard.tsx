@@ -8,6 +8,7 @@ import dayjs from 'dayjs';
 import MineStoreContainer from '@/store/MineStoreContainer';
 import { db } from '@/store/db';
 import Dialog from '@/components/Dialog';
+import { autoSync } from '@/utils/syncData';
 import ShareCard from './ShareCard';
 
 import Styles from './Memo.module.less';
@@ -45,7 +46,11 @@ const MemoCardMore = React.forwardRef(
 );
 
 const MemoCard: React.FC<MemoCardProps> = ({ item, itemIndex }) => {
-  const { memoList, setMemoList } = MineStoreContainer.usePicker(['memoList', 'setMemoList']);
+  const { memoList, setMemoList, setSyncLoading } = MineStoreContainer.usePicker([
+    'memoList',
+    'setMemoList',
+    'setSyncLoading',
+  ]);
 
   const [isEdit, setIsEdit] = React.useState(false);
   const editorRef = React.useRef<Record<string, any>>(null);
@@ -59,6 +64,7 @@ const MemoCard: React.FC<MemoCardProps> = ({ item, itemIndex }) => {
       return memoItem.node_id !== node_id;
     });
     setMemoList(filterMemoList);
+    autoSync(setSyncLoading);
   };
 
   const handleUpdateItem = async () => {
@@ -77,6 +83,7 @@ const MemoCard: React.FC<MemoCardProps> = ({ item, itemIndex }) => {
 
     setMemoList(newMemoList);
     setIsEdit(false);
+    autoSync(setSyncLoading);
   };
 
   const handleSelectMenu = (key: string | undefined) => {

@@ -6,11 +6,16 @@ import RichEditor from '@/pages/mine/components/RichEditor';
 import ViewTopBar from '@mine/containers/ViewTopBar';
 import MemoList from './MemoList';
 import { db } from '@/store/db';
+import { autoSync } from '@/utils/syncData';
 
 import MemoStyles from './Memo.module.less';
 
 const Memo = () => {
-  const { memoList, setMemoList } = MineStoreContainer.usePicker(['memoList', 'setMemoList']);
+  const { memoList, setMemoList, setSyncLoading } = MineStoreContainer.usePicker([
+    'memoList',
+    'setMemoList',
+    'setSyncLoading',
+  ]);
   const [listRender, setListRender] = React.useState(false);
 
   const initList = useMemoizedFn(async () => {
@@ -25,12 +30,13 @@ const Memo = () => {
 
   return (
     <>
-      <ViewTopBar title="MEMO" search={true} />
+      <ViewTopBar title="MEMO" search={true} refresh={true} />
 
       <div className={MemoStyles.input}>
         <RichEditor
           onSubmit={(res) => {
             setMemoList([res!, ...memoList]);
+            autoSync(setSyncLoading);
           }}
         />
       </div>

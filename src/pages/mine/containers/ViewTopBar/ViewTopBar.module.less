@@ -40,3 +40,20 @@
     }
   }
 }
+
+@keyframes refresh-rotating {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.refresh {
+  animation: refresh-rotating 1s linear infinite;
+}
+
+.refresh-paused {
+  animation-play-state: paused;
+}

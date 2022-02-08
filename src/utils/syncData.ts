@@ -28,4 +28,20 @@ const importFromFile = (fileInfo: File) => {
   importFileInfo(fileInfo);
 };
 
-export { exportToGithub, importFromGithub, importFromFile, exportFile };
+const autoSyncToGithub = (setLoading: (flag: boolean) => void) => {
+  setLoading(true);
+  exportToGithub();
+  setTimeout(() => {
+    setLoading(false);
+  }, 300);
+};
+
+const autoSync = (setLoading: (flag: boolean) => void) => {
+  const rfmo = localStorage.getItem('rfmo')!;
+
+  const autoSyncGithub = JSON.parse(rfmo).preferences?.autoSyncGithub;
+
+  if (autoSyncGithub) autoSyncToGithub(setLoading);
+};
+
+export { exportToGithub, importFromGithub, importFromFile, exportFile, autoSync };

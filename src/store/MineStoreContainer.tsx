@@ -42,6 +42,8 @@ const MineStoreContainer = () => {
 
   const [memoList, setMemoList] = React.useState<Record<string, any>[]>([]);
 
+  const [syncLoading, setSyncLoading] = React.useState<boolean>(false);
+
   return {
     asideDrawerIs,
     setAsideDrawerIs,
@@ -51,6 +53,9 @@ const MineStoreContainer = () => {
 
     memoList,
     setMemoList,
+
+    syncLoading,
+    setSyncLoading,
   };
 };
 

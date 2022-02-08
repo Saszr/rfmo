@@ -79,8 +79,8 @@ const HeatGridChart: React.FC<HeatGridStatProps> = (props) => {
                     : '';
 
                 return (
-                  // eslint-disable-next-line react/no-array-index-key
                   <Tooltip
+                    // eslint-disable-next-line react/no-array-index-key
                     key={y}
                     title={`${curMemoCount} memo on ${day}`}
                     overlayInnerStyle={{ borderRadius: '5px', fontSize: '12px' }}
