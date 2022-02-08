@@ -34,7 +34,7 @@ const exportFileInfo = async () => {
 };
 
 const importFileInfo = async (file: Blob) => {
-  await importInto(db, file);
+  await importInto(db, file, { overwriteValues: true });
 };
 
 export { db, exportFile, exportFileInfo, importFileInfo };
