@@ -7,7 +7,6 @@ import ViewTopBar from '@mine/containers/ViewTopBar';
 import MemoList from './MemoList';
 import { db } from '@/store/db';
 
-import Styles from '../view.module.less';
 import MemoStyles from './Memo.module.less';
 
 const Memo = () => {
@@ -28,7 +27,7 @@ const Memo = () => {
     <>
       <ViewTopBar title="MEMO" search={true} />
 
-      <div className={Styles.input}>
+      <div className={MemoStyles.input}>
         <RichEditor
           onSubmit={(res) => {
             setMemoList([res!, ...memoList]);

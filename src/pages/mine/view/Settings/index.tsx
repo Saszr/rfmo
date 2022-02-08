@@ -7,7 +7,6 @@ import { get_user_repo, create_user_repo } from '@/services/githubApi';
 import useLocalData from '@/hooks/useLocalData';
 import ViewTopBar from '@mine/containers/ViewTopBar';
 
-import Styles from '../view.module.less';
 import SettingsStyles from './Settings.module.less';
 
 const Settings = () => {
@@ -61,14 +60,14 @@ const Settings = () => {
     <>
       <ViewTopBar title="Settings" />
 
-      <div className={Styles.block}>
-        <h3>数据同步（Github）</h3>
+      <div className={SettingsStyles['settings-block']}>
+        <div className={SettingsStyles.title}>数据同步（Github）</div>
         <div className={SettingsStyles['settings-form']}>
           <input
             ref={inputGithubTokenRef}
             type="text"
             placeholder="Enter Github Token"
-            style={{ margin: '10px 0' }}
+            style={{ marginBottom: '10px' }}
           />
           <button
             style={{ marginRight: '20px' }}
@@ -94,8 +93,8 @@ const Settings = () => {
         </div>
       </div>
 
-      <div className={Styles.block}>
-        <h3>数据同步（File）</h3>
+      <div className={SettingsStyles['settings-block']}>
+        <div className={SettingsStyles.title}>数据同步（File）</div>
         <div className={SettingsStyles['settings-form']}>
           <button
             style={{ marginRight: '20px' }}
