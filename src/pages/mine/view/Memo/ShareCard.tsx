@@ -4,9 +4,7 @@ import html2canvas from 'html2canvas';
 import Styles from './Memo.module.less';
 
 const ShareCardWrapper = styled.div`
-  box-shadow: 2.8px 2.8px 2.2px rgba(0, 0, 0, 0.07), 6.7px 6.7px 5.3px rgba(0, 0, 0, 0.05),
-    12.5px 12.5px 10px rgba(0, 0, 0, 0.042), 22.3px 22.3px 17.9px rgba(0, 0, 0, 0.035),
-    41.8px 41.8px 33.4px rgba(0, 0, 0, 0.028), 100px 100px 80px rgba(0, 0, 0, 0.02);
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   border-radius: 6px;
 
   > img {
@@ -51,12 +49,18 @@ const ShareCard: React.FC<ShareCardProps> = (props) => {
     <div style={{ width: '100%' }}>
       <div style={{ padding: '16px', backgroundColor: '#fafafa' }}>
         <ShareCardWrapper>
-          <div ref={shareCardRef} className={Styles.card}>
-            <div className={Styles.header}>
-              <div className={Styles.time}>{item.updated_at}</div>
+          <div ref={shareCardRef} className={Styles['share-card']}>
+            <div className={Styles.card}>
+              <div className={Styles.header}>
+                <div className={Styles.time}>{item.updated_at}</div>
+              </div>
+              <div className={Styles.content}>
+                <div dangerouslySetInnerHTML={{ __html: item.body }} />
+              </div>
             </div>
-            <div className={Styles.content}>
-              <div dangerouslySetInnerHTML={{ __html: item.body }} />
+
+            <div className={Styles.footer}>
+              <p>via rFmo</p>
             </div>
           </div>
         </ShareCardWrapper>
