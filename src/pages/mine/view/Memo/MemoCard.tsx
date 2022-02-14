@@ -1,7 +1,6 @@
 import React from 'react';
 import { MdOutlineMoreHoriz } from 'react-icons/md';
 import { Popover } from 'antd';
-import RichEditor from '@/pages/mine/components/RichEditor';
 import produce from 'immer';
 import dayjs from 'dayjs';
 
@@ -10,6 +9,8 @@ import { db } from '@/store/db';
 import Dialog from '@/components/Dialog';
 import { autoSync } from '@/utils/syncData';
 import ShareCard from './ShareCard';
+import Editor from './Editor';
+import { MarkdownPreview } from '@/components/MarkdownEditor';
 
 import Styles from './Memo.module.less';
 
@@ -53,7 +54,6 @@ const MemoCard: React.FC<MemoCardProps> = ({ item, itemIndex }) => {
   ]);
 
   const [isEdit, setIsEdit] = React.useState(false);
-  const editorRef = React.useRef<Record<string, any>>(null);
 
   const [popoverVisible, setPopoverVisible] = React.useState(false);
 
@@ -67,9 +67,8 @@ const MemoCard: React.FC<MemoCardProps> = ({ item, itemIndex }) => {
     autoSync(setSyncLoading);
   };
 
-  const handleUpdateItem = async () => {
+  const handleUpdateItem = async (value: string) => {
     const { node_id } = item;
-    const value = editorRef.current!.value;
 
     await db.memo.update(node_id, {
       body: value,
@@ -107,31 +106,18 @@ const MemoCard: React.FC<MemoCardProps> = ({ item, itemIndex }) => {
     <div className={Styles.memo}>
       <div className={Styles.card}>
         {isEdit ? (
-          <RichEditor
-            ref={editorRef}
+          <Editor
             initDoc={item.body}
-            disableSubmit={true}
-            extraBtn={
-              <>
-                <button
-                  type="button"
-                  style={{ marginRight: '6px' }}
-                  onClick={() => {
-                    setIsEdit(false);
-                  }}
-                >
-                  取消
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    handleUpdateItem();
-                  }}
-                >
-                  更新
-                </button>
-              </>
-            }
+            extraBtnArr={{
+              update: (res) => {
+                setPopoverVisible(false);
+                handleUpdateItem(res as string);
+              },
+              cancel: () => {
+                setPopoverVisible(false);
+                setIsEdit(false);
+              },
+            }}
           />
         ) : (
           <>
@@ -154,7 +140,7 @@ const MemoCard: React.FC<MemoCardProps> = ({ item, itemIndex }) => {
               </div>
             </div>
             <div className={Styles.content}>
-              <div dangerouslySetInnerHTML={{ __html: item.body }} />
+              <MarkdownPreview doc={item.body} />
             </div>
           </>
         )}

@@ -2,11 +2,11 @@ import React from 'react';
 import { useMemoizedFn } from 'ahooks';
 
 import MineStoreContainer from '@/store/MineStoreContainer';
-import RichEditor from '@/pages/mine/components/RichEditor';
 import ViewTopBar from '@mine/containers/ViewTopBar';
 import MemoList from './MemoList';
 import { db } from '@/store/db';
 import { autoSync } from '@/utils/syncData';
+import Editor from './Editor';
 
 import MemoStyles from './Memo.module.less';
 
@@ -33,10 +33,13 @@ const Memo = () => {
       <ViewTopBar title="MEMO" search={true} refresh={true} />
 
       <div className={MemoStyles.input}>
-        <RichEditor
-          onSubmit={(res) => {
-            setMemoList([res!, ...memoList]);
-            autoSync(setSyncLoading);
+        <Editor
+          extraBtnArr={{
+            submit: (res) => {
+              const list = res as unknown as Record<string, any>;
+              setMemoList([list!, ...memoList]);
+              autoSync(setSyncLoading);
+            },
           }}
         />
       </div>
@@ -46,7 +49,7 @@ const Memo = () => {
       ) : (
         <div className={MemoStyles.memos}>
           <div className={MemoStyles['status-text-container']}>
-            <p className={MemoStyles['status-text']}>薛定谔的数据～加载中</p>
+            <p className={MemoStyles['status-text']}>薛定谔的数据~加载中</p>
           </div>
         </div>
       )}

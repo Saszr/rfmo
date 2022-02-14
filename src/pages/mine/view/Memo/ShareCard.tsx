@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import html2canvas from 'html2canvas';
+import { MarkdownPreview } from '@/components/MarkdownEditor';
+
 import Styles from './Memo.module.less';
 
 const ShareCardWrapper = styled.div`
@@ -28,6 +30,7 @@ const ShareCard: React.FC<ShareCardProps> = (props) => {
     const shareCardDom = shareCardRef.current!;
 
     const canvas = await html2canvas(shareCardDom, {
+      allowTaint: true,
       scale: window.devicePixelRatio * 2,
       height: shareCardDom.clientHeight,
       width: shareCardDom.clientWidth,
@@ -36,12 +39,14 @@ const ShareCard: React.FC<ShareCardProps> = (props) => {
     const image = new Image(shareCardDom.clientWidth, shareCardDom.clientHeight);
     image.src = canvas.toDataURL('image/png');
 
-    shareCardDom.parentNode!.replaceChild(image, shareCardDom);
+    shareCardDom.parentNode!.replaceChild(canvas, shareCardDom);
   };
 
   React.useEffect(() => {
     if (shareCardRef.current) {
-      initShareCardImg();
+      setTimeout(() => {
+        initShareCardImg();
+      }, 1000);
     }
   }, []);
 
@@ -55,7 +60,7 @@ const ShareCard: React.FC<ShareCardProps> = (props) => {
                 <div className={Styles.time}>{item.updated_at}</div>
               </div>
               <div className={Styles.content}>
-                <div dangerouslySetInnerHTML={{ __html: item.body }} />
+                <MarkdownPreview doc={item.body} />
               </div>
             </div>
 
