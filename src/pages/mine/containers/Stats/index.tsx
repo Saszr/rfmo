@@ -50,6 +50,10 @@ const Stat = () => {
 
   React.useEffect(() => {
     renderStats();
+
+    return () => {
+      setHeatGridChart({});
+    };
   }, [memoList]);
 
   return (
