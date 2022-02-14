@@ -1,0 +1,54 @@
+.container {
+  .editor-container {
+    background: #fff;
+    padding: 8px;
+    border: 2px solid #e8e8e8;
+    border-radius: 0 8px 8px 8px;
+
+    .editor {
+      background: #fff;
+      box-sizing: border-box;
+      width: 100%;
+
+      resize: none;
+      border: 0;
+      min-height: 40px;
+      max-height: calc(50vh);
+      overflow-y: scroll;
+    }
+  }
+
+  .preview {
+    border: 2px solid #e8e8e8;
+    border-radius: 8px;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 8px;
+    overflow-y: scroll;
+    min-height: 40px;
+    max-height: calc(50vh);
+  }
+
+  .footer {
+    display: flex;
+    flex-direction: row-reverse;
+    padding: 8px 0;
+
+    button {
+      color: #fff;
+      background: #55bb8e;
+      border-color: #55bb8e;
+      font-size: 12px;
+      padding: 6px 15px;
+      border-radius: 3px;
+      border: 1px solid #dcdfe6;
+      cursor: pointer;
+      margin-left: 6px;
+    }
+
+    button:disabled {
+      background: #aaddc6;
+      border-color: #aaddc6;
+    }
+  }
+}
