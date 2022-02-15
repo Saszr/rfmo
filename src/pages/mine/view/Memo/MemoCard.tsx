@@ -139,9 +139,7 @@ const MemoCard: React.FC<MemoCardProps> = ({ item, itemIndex }) => {
                 </Popover>
               </div>
             </div>
-            <div className={Styles.content}>
-              <MarkdownPreview doc={item.body} />
-            </div>
+            <MarkdownPreview doc={item.body} />
           </>
         )}
       </div>
