@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import markdownIt from 'markdown-it';
 import hljs from 'highlight.js';
@@ -65,7 +64,7 @@ const MarkdownEditor = (props: EditorProps) => {
   };
 
   React.useEffect(() => {
-    if (initDoc) {
+    if (typeof initDoc !== 'undefined') {
       setDoc(initDoc);
 
       const tempTextarea = document.createElement('textarea');
@@ -87,7 +86,7 @@ const MarkdownEditor = (props: EditorProps) => {
               className={Styles.editor}
               onChange={(e) => handleEditorChange(e)}
               style={{ height: textareaInitHeight }}
-              defaultValue={initDoc}
+              value={doc}
             />
           </div>
         </Tabs.TabPane>

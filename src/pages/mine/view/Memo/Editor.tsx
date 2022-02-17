@@ -10,10 +10,11 @@ interface EditorExtraBtnProps {
   editorVal: string;
   onClick?: (params: Record<string, any> | string | undefined) => void;
   title?: string;
+  handleDocClean?: () => void;
 }
 
 const EditorExtraBtnSubmit = (props: EditorExtraBtnProps) => {
-  const { editorVal, onClick } = props;
+  const { editorVal, onClick, handleDocClean } = props;
 
   const [submitBtnDisabled, setSubmitBtnDisabled] = React.useState(true);
 
@@ -34,6 +35,10 @@ const EditorExtraBtnSubmit = (props: EditorExtraBtnProps) => {
     });
 
     const res = await db.memo.get(node_id);
+
+    if (handleDocClean) {
+      handleDocClean();
+    }
 
     if (onClick) onClick(res);
   };
@@ -83,9 +88,18 @@ const Editor = (props: EditorProps) => {
     setEditorVal(value);
   };
 
+  const handleDocClean = () => {
+    setEditorVal('');
+  };
+
   const extraBtn: Record<string, React.ReactNode> = {
     submit: (
-      <EditorExtraBtnSubmit key="submit" editorVal={editorVal} onClick={extraBtnArr.submit} />
+      <EditorExtraBtnSubmit
+        key="submit"
+        editorVal={editorVal}
+        handleDocClean={handleDocClean}
+        onClick={extraBtnArr.submit}
+      />
     ),
     update: (
       <EditorExtraBtn
@@ -107,7 +121,7 @@ const Editor = (props: EditorProps) => {
 
   return (
     <MarkdownEditor
-      initDoc={initDoc}
+      initDoc={editorVal}
       onChange={handleChange}
       extraBtn={
         <>
