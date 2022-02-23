@@ -41,12 +41,13 @@ const MarkdownPreview = ({ doc, className }: { doc: string; className?: string }
 
 interface EditorProps {
   initDoc?: string;
+  extraArea?: React.ReactNode;
   extraBtn?: React.ReactNode;
   onChange?: (value: string) => void;
 }
 
 const MarkdownEditor = (props: EditorProps) => {
-  const { initDoc, extraBtn, onChange } = props;
+  const { initDoc, extraBtn, onChange, extraArea } = props;
 
   const editorTextarea = React.useRef<HTMLTextAreaElement>(null);
   const [doc, setDoc] = React.useState('');
@@ -95,7 +96,10 @@ const MarkdownEditor = (props: EditorProps) => {
         </Tabs.TabPane>
       </Tabs>
 
-      <div className={Styles.footer}>{extraBtn}</div>
+      <div className={Styles.footer}>
+        <div className={Styles.extraArea}>{extraArea}</div>
+        <div className={Styles.extraBtn}>{extraBtn}</div>
+      </div>
     </div>
   );
 };

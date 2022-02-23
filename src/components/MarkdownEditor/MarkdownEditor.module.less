@@ -31,24 +31,34 @@
 
   .footer {
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
     padding: 8px 0;
 
-    button {
-      color: #fff;
-      background: #55bb8e;
-      border-color: #55bb8e;
-      font-size: 12px;
-      padding: 6px 15px;
-      border-radius: 3px;
-      border: 1px solid #dcdfe6;
-      cursor: pointer;
-      margin-left: 6px;
+    .extraArea {
+      width: 60%;
     }
 
-    button:disabled {
-      background: #aaddc6;
-      border-color: #aaddc6;
+    .extraBtn {
+      width: 40%;
+      display: flex;
+      flex-direction: row-reverse;
+
+      button {
+        color: #fff;
+        background: #55bb8e;
+        border-color: #55bb8e;
+        font-size: 12px;
+        padding: 6px 15px;
+        border-radius: 3px;
+        border: 1px solid #dcdfe6;
+        cursor: pointer;
+        margin-left: 6px;
+      }
+
+      button:disabled {
+        background: #aaddc6;
+        border-color: #aaddc6;
+      }
     }
   }
 }
