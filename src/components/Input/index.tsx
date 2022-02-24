@@ -1,6 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
 
+import omit from '@/utils/omit';
+
 import Styles from './Input.module.less';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -9,6 +11,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 
 const Input = (props: InputProps) => {
   const { onPressEnter, onBlur, onChange, className } = props;
+  const otherProps = omit(props as InputProps & { inputType: any }, ['onPressEnter']);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange?.(e);
@@ -26,7 +29,7 @@ const Input = (props: InputProps) => {
 
   return (
     <input
-      {...props}
+      {...otherProps}
       className={classNames(Styles.input, className)}
       onChange={handleChange}
       onBlur={handleBlur}

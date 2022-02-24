@@ -15,10 +15,9 @@ export interface TagProps extends React.HTMLAttributes<HTMLSpanElement> {
   icon?: React.ReactNode;
 }
 
-const InternalTag: React.ForwardRefRenderFunction<HTMLSpanElement, TagProps> = (props) => {
+const InternalTag: React.ForwardRefRenderFunction<HTMLSpanElement, TagProps> = (props, ref) => {
   const { children, style, closable, closeIcon, onClose, onClick } = props;
   const [visible, setVisible] = React.useState(true);
-  const tagRef = React.useRef(null);
 
   const handleCloseClick = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
@@ -51,7 +50,7 @@ const InternalTag: React.ForwardRefRenderFunction<HTMLSpanElement, TagProps> = (
   return (
     <>
       {visible && (
-        <span ref={tagRef} className={Styles.tag} style={{ ...style }} onClick={handleClick}>
+        <span ref={ref} className={Styles.tag} style={{ ...style }} onClick={handleClick}>
           {children}
           {renderCloseIcon()}
         </span>

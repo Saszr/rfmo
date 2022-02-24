@@ -54,7 +54,12 @@ const AsideDrawer = () => {
 const WrapperAside = () => {
   const { asideDrawerIs } = MineStoreContainer.usePicker(['asideDrawerIs']);
 
-  return <>{asideDrawerIs ? <AsideDrawer /> : <AsideBasic />}</>;
+  return (
+    <>
+      {asideDrawerIs === true && <AsideDrawer />}
+      {asideDrawerIs === false && <AsideBasic />}
+    </>
+  );
 };
 
 export default WrapperAside;
