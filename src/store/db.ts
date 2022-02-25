@@ -3,20 +3,24 @@ import type { Table } from 'dexie';
 import { importInto, exportDB } from 'dexie-export-import';
 import { saveAs } from 'file-saver';
 
-interface memo {
-  node_id?: string;
+export interface MemoProps {
+  node_id: string;
   body: string;
   created_at: string;
   updated_at: string;
+  tags: {
+    key: string;
+    value: string;
+  }[];
 }
 
 class MySubClassedDexie extends Dexie {
-  memo!: Table<memo>;
+  memo!: Table<MemoProps>;
 
   constructor() {
     super('rfmoDB');
     this.version(1).stores({
-      memo: '&node_id, body, created_at, updated_at',
+      memo: '&node_id, body, created_at, updated_at,tags',
     });
   }
 }

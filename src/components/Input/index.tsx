@@ -9,7 +9,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   onPressEnter?: React.KeyboardEventHandler<HTMLInputElement>;
 }
 
-const Input = (props: InputProps) => {
+const Input = React.forwardRef((props: InputProps, ref: React.Ref<HTMLInputElement>) => {
   const { onPressEnter, onBlur, onChange, className } = props;
   const otherProps = omit(props as InputProps & { inputType: any }, ['onPressEnter']);
 
@@ -29,6 +29,7 @@ const Input = (props: InputProps) => {
 
   return (
     <input
+      ref={ref}
       {...otherProps}
       className={classNames(Styles.input, className)}
       onChange={handleChange}
@@ -36,6 +37,6 @@ const Input = (props: InputProps) => {
       onKeyDown={handleKeyDown}
     />
   );
-};
+});
 
 export default Input;

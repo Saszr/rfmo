@@ -11,11 +11,14 @@ import { autoSync } from '@/utils/syncData';
 import ShareCard from './ShareCard';
 import Editor from './Editor';
 import { MarkdownPreview } from '@/components/MarkdownEditor';
+import Tag from '@/components/Tag';
 
+import type { TagItem } from './Editor';
+import type { MemoProps } from '@/store/db';
 import Styles from './Memo.module.less';
 
 export interface MemoCardProps {
-  item: Record<string, any>;
+  item: MemoProps;
   itemIndex: number;
 }
 
@@ -67,12 +70,19 @@ const MemoCard: React.FC<MemoCardProps> = ({ item, itemIndex }) => {
     autoSync(setSyncLoading);
   };
 
-  const handleUpdateItem = async (value: string) => {
+  const handleUpdateItem = async ({
+    editorVal,
+    editorTags,
+  }: {
+    editorVal: string;
+    editorTags: TagItem[];
+  }) => {
     const { node_id } = item;
 
     await db.memo.update(node_id, {
-      body: value,
+      body: editorVal,
       updated_at: dayjs().format('YYYY-MM-DD HH:mm:ss'),
+      tags: editorTags,
     });
 
     const res = await db.memo.get(node_id);
@@ -108,10 +118,16 @@ const MemoCard: React.FC<MemoCardProps> = ({ item, itemIndex }) => {
         {isEdit ? (
           <Editor
             initDoc={item.body}
+            initTags={item.tags}
             extraBtnArr={{
               update: (res) => {
                 setPopoverVisible(false);
-                handleUpdateItem(res as string);
+                handleUpdateItem(
+                  res as {
+                    editorVal: string;
+                    editorTags: TagItem[];
+                  },
+                );
               },
               cancel: () => {
                 setPopoverVisible(false);
@@ -140,6 +156,15 @@ const MemoCard: React.FC<MemoCardProps> = ({ item, itemIndex }) => {
               </div>
             </div>
             <MarkdownPreview doc={item.body} />
+
+            {item.tags.length > 0 && (
+              <div>
+                {item.tags.map((tagItem) => {
+                  // eslint-disable-next-line react/no-array-index-key
+                  return <Tag key={tagItem.key}>{tagItem.value}</Tag>;
+                })}
+              </div>
+            )}
           </>
         )}
       </div>
