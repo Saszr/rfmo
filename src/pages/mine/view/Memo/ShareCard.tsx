@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import html2canvas from 'html2canvas';
 import { MarkdownPreview } from '@/components/MarkdownEditor';
+import { isNull } from 'lodash';
+import { useMemoizedFn } from 'ahooks';
 
 import Styles from './Memo.module.less';
 
@@ -24,11 +26,11 @@ interface ShareCardProps {
 
 const ShareCard: React.FC<ShareCardProps> = (props) => {
   const { item } = props;
-  const shareCardRef = React.useRef<HTMLDivElement>(null);
+  const [shareCardRef, setShareCardRef] = React.useState<HTMLDivElement | null>(null);
   const [imgLoading, setImgLoading] = React.useState(true);
 
-  const initShareCardImg = async () => {
-    const shareCardDom = shareCardRef.current!;
+  const initShareCardImg = useMemoizedFn(async () => {
+    const shareCardDom = shareCardRef!;
 
     const canvas = await html2canvas(shareCardDom, {
       useCORS: true,
@@ -40,16 +42,14 @@ const ShareCard: React.FC<ShareCardProps> = (props) => {
     image.src = canvas.toDataURL('image/png');
 
     shareCardDom.parentNode!.replaceChild(image, shareCardDom);
-  };
+  });
 
   React.useEffect(() => {
-    if (shareCardRef.current) {
-      setTimeout(() => {
-        initShareCardImg();
-        setImgLoading(false);
-      }, 1000);
+    if (!isNull(shareCardRef)) {
+      initShareCardImg();
+      setImgLoading(false);
     }
-  }, []);
+  }, [shareCardRef, initShareCardImg]);
 
   return (
     <div style={{ width: '100%' }}>
@@ -60,7 +60,7 @@ const ShareCard: React.FC<ShareCardProps> = (props) => {
           </p>
         </div>
         <ShareCardWrapper>
-          <div ref={shareCardRef} className={Styles['share-card']}>
+          <div ref={(ref) => setShareCardRef(ref)} className={Styles['share-card']}>
             <div className={Styles.card}>
               <div className={Styles.header}>
                 <div className={Styles.time}>{item.updated_at}</div>
