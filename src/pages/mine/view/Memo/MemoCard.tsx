@@ -155,10 +155,10 @@ const MemoCard: React.FC<MemoCardProps> = ({ item, itemIndex }) => {
                 </Popover>
               </div>
             </div>
-            <MarkdownPreview doc={item.body} />
+            <MarkdownPreview className={Styles.body} doc={item.body} />
 
             {item.tags.length > 0 && (
-              <div>
+              <div className={Styles.footer}>
                 {item.tags.map((tagItem) => {
                   // eslint-disable-next-line react/no-array-index-key
                   return <Tag key={tagItem.key}>{tagItem.value}</Tag>;
