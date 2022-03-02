@@ -1,21 +1,6 @@
+const fiberLint = require('fiber-lint');
+
 module.exports = {
-  singleQuote: true,
-  trailingComma: 'all',
+  ...fiberLint.prettier,
   printWidth: 100,
-  proseWrap: 'never',
-  endOfLine: 'lf',
-  overrides: [
-    {
-      files: '.prettierrc',
-      options: {
-        parser: 'json',
-      },
-    },
-    {
-      files: 'document.ejs',
-      options: {
-        parser: 'html',
-      },
-    },
-  ],
 };

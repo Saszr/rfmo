@@ -28,7 +28,7 @@ specifiers:
   dexie: ^3.2.0
   dexie-export-import: ^1.0.3
   dexie-react-hooks: ^1.1.1
-  fiber-lint: ^0.0.4
+  fiber-lint: ^0.0.5
   file-saver: ^2.0.5
   heo: ^1.4.0
   highlight.js: ^11.4.0
@@ -115,7 +115,7 @@ devDependencies:
   '@types/styled-components': 5.1.18
   '@vitejs/plugin-react': registry.npmmirror.com/@vitejs/plugin-react/1.1.3
   cross-env: 7.0.3
-  fiber-lint: 0.0.4
+  fiber-lint: 0.0.5
   less: registry.npmmirror.com/less/4.1.2
   rollup-plugin-visualizer: 5.5.2
   typescript-plugin-css-modules: 3.4.0
@@ -3228,8 +3228,8 @@ packages:
       reusify: 1.0.4
     dev: true
 
-  /fiber-lint/0.0.4:
-    resolution: {integrity: sha512-D9hRjbIB6OBBX9ActZ+fBYOZYtWf3OpKFV8Jgez5baeaLyhuQGlZjK1z2YPKqdjDm7BPEotap4gtlJQ4Brnn1Q==}
+  /fiber-lint/0.0.5:
+    resolution: {integrity: sha512-OUxEtfUXlnoUN73p/EhMSqFs772RyTHstHcWxEBv87bj5ie9Oj7eCPm6TSGsQKFgqyuVAC5i3InXzC/RKrg9iQ==}
     hasBin: true
     dependencies:
       '@babel/core': 7.16.5
