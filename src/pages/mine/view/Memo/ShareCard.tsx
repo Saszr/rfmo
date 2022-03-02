@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import html2canvas from 'html2canvas';
 import { MarkdownPreview } from '@/components/MarkdownEditor';
-import { isNull } from 'lodash';
+import { isNull } from 'lodash-es';
 import { useMemoizedFn } from 'ahooks';
 
 import Styles from './Memo.module.less';

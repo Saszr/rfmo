@@ -4,7 +4,7 @@ specifiers:
   '@octokit/endpoint': ^6.0.12
   '@octokit/types': ^6.34.0
   '@types/file-saver': ^2.0.5
-  '@types/lodash': ^4.14.178
+  '@types/lodash-es': ^4.17.6
   '@types/markdown-it': ^12.2.3
   '@types/node': ^16.11.12
   '@types/prosemirror-commands': ^1.0.4
@@ -36,7 +36,7 @@ specifiers:
   immer: ^9.0.7
   js-base64: ^3.7.2
   less: ^4.1.2
-  lodash: ^4.17.21
+  lodash-es: ^4.17.21
   markdown-it: ^12.3.2
   nanoid: ^3.1.30
   prosemirror-commands: ^1.1.12
@@ -76,7 +76,7 @@ dependencies:
   html2canvas: 1.4.1
   immer: 9.0.7
   js-base64: 3.7.2
-  lodash: 4.17.21
+  lodash-es: 4.17.21
   markdown-it: 12.3.2
   nanoid: 3.1.30
   prosemirror-commands: 1.1.12
@@ -98,7 +98,7 @@ dependencies:
 
 devDependencies:
   '@types/file-saver': 2.0.5
-  '@types/lodash': 4.14.178
+  '@types/lodash-es': 4.17.6
   '@types/markdown-it': 12.2.3
   '@types/node': registry.npmmirror.com/@types/node/16.11.12
   '@types/prosemirror-commands': 1.0.4
@@ -1651,6 +1651,12 @@ packages:
 
   /@types/linkify-it/3.0.2:
     resolution: {integrity: sha512-HZQYqbiFVWufzCwexrvh694SOim8z2d+xJl5UNamcvQFejLY/2YUtzXHYi3cHdI7PMlS8ejH2slRAOJQ32aNbA==}
+    dev: true
+
+  /@types/lodash-es/4.17.6:
+    resolution: {integrity: sha512-R+zTeVUKDdfoRxpAryaQNRKk3105Rrgx2CFRClIgRGaqDTdjsm8h6IYA8ir584W3ePzkZfst5xIgDwYrlh9HLg==}
+    dependencies:
+      '@types/lodash': 4.14.178
     dev: true
 
   /@types/lodash/4.14.178:
@@ -4066,6 +4072,10 @@ packages:
     dependencies:
       p-locate: 4.1.0
     dev: true
+
+  /lodash-es/4.17.21:
+    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
+    dev: false
 
   /lodash.camelcase/4.3.0:
     resolution: {integrity: sha1-soqmKIorn8ZRA1x3EfZathkDMaY=}

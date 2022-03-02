@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import MineStoreContainer from '@/store/MineStoreContainer';
 import WrapperAside from '@/pages/mine/containers/WrapperAside';
 import WrapperMain from '@/pages/mine/containers/WrapperMain';
 
@@ -19,10 +20,12 @@ const Wrapper = styled.section`
 
 const Mine = () => {
   return (
-    <Wrapper>
-      <WrapperAside />
-      <WrapperMain />
-    </Wrapper>
+    <MineStoreContainer.Provider>
+      <Wrapper>
+        <WrapperAside />
+        <WrapperMain />
+      </Wrapper>
+    </MineStoreContainer.Provider>
   );
 };
 

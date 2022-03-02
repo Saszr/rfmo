@@ -4,8 +4,9 @@ import { VscGithubInverted } from 'react-icons/vsc';
 
 import { useNavigateSearch } from '@/hooks/useRouterDom';
 import Stats from '@mine/containers/Stats';
-import Sidebar from '@mine/components/Sidebar';
+import Sidebar from '@mine/containers/WrapperAside/Sidebar';
 import menuList from './menuList';
+import TagsMenu from './TagsMenu';
 
 import Styles from './WrapperAside.module.less';
 
@@ -43,6 +44,7 @@ const AsideContent = () => {
       <HeaderUser />
       <Stats />
       <Sidebar menuList={menuList} />
+      {/* <TagsMenu /> */}
     </>
   );
 };

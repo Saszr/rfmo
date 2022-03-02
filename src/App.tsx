@@ -1,12 +1,12 @@
 import React from 'react';
 import { HashRouter as Router } from 'react-router-dom';
 
-import Index from './pages';
+import PageRoutes from './router';
 
 const App = () => {
   return (
     <Router>
-      <Index />
+      <PageRoutes />
     </Router>
   );
 };

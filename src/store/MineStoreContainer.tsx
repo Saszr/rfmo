@@ -2,6 +2,8 @@ import React from 'react';
 import { createContainer } from 'heo';
 import { useSize } from 'ahooks';
 
+import type { MemoProps } from '@/store/db';
+
 const useAsideDrawerState = () => {
   const [asideDrawerVisible, setAsideDrawerVisible] = React.useState(false);
 
@@ -40,7 +42,7 @@ const MineStoreContainer = () => {
   const { asideDrawerIs, setAsideDrawerIs, asideDrawerVisible, setAsideDrawerVisible } =
     useAsideDrawerState();
 
-  const [memoList, setMemoList] = React.useState<Record<string, any>[]>([]);
+  const [memoList, setMemoList] = React.useState<MemoProps[]>([]);
 
   const [syncLoading, setSyncLoading] = React.useState<boolean>(false);
 

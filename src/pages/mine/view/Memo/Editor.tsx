@@ -3,7 +3,7 @@ import { nanoid } from 'nanoid';
 import dayjs from 'dayjs';
 import { useMemoizedFn } from 'ahooks';
 import { BiPlus } from 'react-icons/bi';
-import { isNull } from 'lodash';
+import { isNull } from 'lodash-es';
 
 import MarkdownEditor from '@/components/MarkdownEditor';
 import Tag from '@/components/Tag';

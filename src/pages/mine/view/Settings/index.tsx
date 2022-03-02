@@ -1,7 +1,7 @@
 import React from 'react';
 import { BiExport, BiImport } from 'react-icons/bi';
 import produce from 'immer';
-import { isUndefined } from 'lodash';
+import { isUndefined } from 'lodash-es';
 import { exportToGithub, importFromGithub, importFromFile, exportFile } from '@/utils/syncData';
 import { get_user_repo, create_user_repo } from '@/services/githubApi';
 import useLocalData from '@/hooks/useLocalData';
