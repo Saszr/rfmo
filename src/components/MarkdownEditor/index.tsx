@@ -49,33 +49,32 @@ interface EditorProps {
 const MarkdownEditor = (props: EditorProps) => {
   const { initDoc, extraBtn, onChange, extraArea } = props;
 
-  const editorTextarea = React.useRef<HTMLTextAreaElement>(null);
   const [doc, setDoc] = React.useState('');
-  const [textareaInitHeight, setTextareaInitHeight] = React.useState('auto');
+  // const [textareaInitHeight, setTextareaInitHeight] = React.useState('auto');
+  const [editorTextareaRef, setEditorTextareaRef] = React.useState<HTMLTextAreaElement | null>(
+    null,
+  );
 
-  const handleEditorChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setDoc(e.target.value);
-
-    const textarea = editorTextarea.current;
-    if (textarea) {
-      textarea.style.height = 'auto';
-      textarea.style.height = textarea.scrollHeight + 'px';
-      if (onChange) onChange(textarea.value);
+  const handleEditorChange = () => {
+    if (editorTextareaRef) {
+      editorTextareaRef.style.height = 'auto';
+      editorTextareaRef.style.height = editorTextareaRef.scrollHeight + 'px';
+      if (onChange) onChange(editorTextareaRef.value);
     }
   };
 
   React.useEffect(() => {
     if (typeof initDoc !== 'undefined') {
       setDoc(initDoc);
-
-      const tempTextarea = document.createElement('textarea');
-      tempTextarea.innerHTML = initDoc;
-      document.body.append(tempTextarea);
-      const height = `${tempTextarea.scrollHeight}px`;
-      setTextareaInitHeight(height);
-      document.body.removeChild(tempTextarea);
     }
   }, [initDoc]);
+
+  React.useEffect(() => {
+    if (editorTextareaRef) {
+      editorTextareaRef.style.height = 'auto';
+      editorTextareaRef.style.height = editorTextareaRef.scrollHeight + 'px';
+    }
+  }, [editorTextareaRef]);
 
   return (
     <div className={Styles.container}>
@@ -83,10 +82,9 @@ const MarkdownEditor = (props: EditorProps) => {
         <Tabs.TabPane tab="Write" key="1">
           <div className={Styles['editor-container']}>
             <textarea
-              ref={editorTextarea}
+              ref={(ref) => setEditorTextareaRef(ref)}
               className={Styles.editor}
-              onChange={(e) => handleEditorChange(e)}
-              style={{ height: textareaInitHeight }}
+              onChange={() => handleEditorChange()}
               value={doc}
             />
           </div>
