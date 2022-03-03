@@ -78,7 +78,7 @@ const MarkdownEditor = (props: EditorProps) => {
 
   return (
     <div className={Styles.container}>
-      <Tabs defaultActiveKey="1">
+      <Tabs defaultActiveKey="1" renderAllTabPanes>
         <Tabs.TabPane tab="Write" key="1">
           <div className={Styles['editor-container']}>
             <textarea

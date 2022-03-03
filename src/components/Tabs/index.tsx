@@ -4,21 +4,26 @@ interface TabsProps {
   children: JSX.Element[];
   defaultActiveKey: string;
   tabBarExtraContent?: React.ReactNode;
+  renderAllTabPanes?: boolean;
 }
 
 interface TabPaneProps {
   children: JSX.Element;
   tab: string;
   active?: boolean;
+  renderAllTabPanes?: boolean;
 }
 
-const TabPane = ({ children, active }: TabPaneProps) => {
+const TabPane = ({ children, active, renderAllTabPanes }: TabPaneProps) => {
   const [visited, setVisited] = React.useState(false);
 
   React.useEffect(() => {
-    if (active) {
+    if (renderAllTabPanes) {
       setVisited(true);
+      return;
     }
+
+    if (active) setVisited(true);
   }, [active]);
 
   const mergedStyle: React.CSSProperties = {};
@@ -29,7 +34,12 @@ const TabPane = ({ children, active }: TabPaneProps) => {
   return <div style={{ ...mergedStyle }}>{visited && children}</div>;
 };
 
-const Tabs = ({ children, defaultActiveKey, tabBarExtraContent }: TabsProps) => {
+const Tabs = ({
+  children,
+  defaultActiveKey,
+  tabBarExtraContent,
+  renderAllTabPanes = false,
+}: TabsProps) => {
   const [active, setActive] = React.useState<React.Key>(defaultActiveKey);
 
   return (
@@ -63,6 +73,7 @@ const Tabs = ({ children, defaultActiveKey, tabBarExtraContent }: TabsProps) => 
         const enhancedChild = React.cloneElement(child, {
           code: child.key,
           active: active === child.key,
+          renderAllTabPanes,
         });
         return enhancedChild;
       })}
