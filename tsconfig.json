@@ -27,6 +27,8 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
+      "@homepage/*": ["./src/pages/homepage/*"],
+      "@login/*": ["./src/pages/login/*"],
       "@mine/*": ["./src/pages/mine/*"]
     }
   },

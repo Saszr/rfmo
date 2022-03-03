@@ -23,6 +23,8 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
+      '@homepage': path.resolve(__dirname, 'src/pages/homepage'),
+      '@login': path.resolve(__dirname, 'src/pages/login'),
       '@mine': path.resolve(__dirname, 'src/pages/mine'),
       'antd/dist/antd.less$': path.resolve(__dirname, './src/antd.less'),
     },

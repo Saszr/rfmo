@@ -25,10 +25,9 @@
 }
 
 .card {
-  position: relative;
   background: #ffffff;
   border-radius: 6px;
-  padding: 15px;
+  padding: 12px 15px;
 
   .header {
     display: flex;
@@ -43,67 +42,77 @@
     }
   }
 
-  .content {
-    color: #323232;
-    font-size: 14px;
-    position: relative;
-    overflow: hidden;
-
-    p {
-      line-height: 1.8;
-      min-height: 20px;
-      margin: 0;
-    }
-  }
-}
-
-.share-card {
-  .card {
-    position: relative;
-    background: #ffffff;
-    border-radius: 6px 6px 0 0;
-    padding: 15px;
-
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-
-      .time {
-        display: block;
-        font-size: 12px;
-        color: #8f9193;
-        text-decoration: none;
-      }
-    }
-
-    .content {
-      color: #323232;
-      font-size: 13px;
-      position: relative;
-      overflow: hidden;
-
-      p {
-        line-height: 1.8;
-        min-height: 20px;
-        margin: 0;
-      }
-    }
+  .body {
+    margin-top: 6px;
   }
 
   .footer {
-    padding: 10px 15px;
+    margin-top: 6px;
+  }
+}
 
-    display: flex;
-    justify-content: flex-end;
-    background-color: #f8f8f8;
+.share-dialog {
+  padding: 4px 16px 16px;
+  background-color: #fafafa;
+
+  .share-tips {
+    font-size: 14px;
+    color: #454545;
+    margin: 8px 0;
 
     p {
-      font-size: 12px;
-      color: #8f9193;
       margin: 0;
-      font-weight: bold;
+    }
+  }
+
+  .share-card {
+    .card {
+      position: relative;
+      background: #ffffff;
+      border-radius: 6px 6px 0 0;
+      padding: 15px;
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+
+        .time {
+          display: block;
+          font-size: 12px;
+          color: #8f9193;
+          text-decoration: none;
+        }
+      }
+
+      .content {
+        color: #323232;
+        font-size: 13px;
+        position: relative;
+        overflow: hidden;
+
+        p {
+          line-height: 1.8;
+          min-height: 20px;
+          margin: 0;
+        }
+      }
+    }
+
+    .footer {
+      padding: 10px 15px;
+
+      display: flex;
+      justify-content: flex-end;
+      background-color: #f8f8f8;
+
+      p {
+        font-size: 12px;
+        color: #8f9193;
+        margin: 0;
+        font-weight: bold;
+      }
     }
   }
 }
@@ -135,4 +144,23 @@
 
 .input {
   padding: 10px 20px 10px;
+}
+
+.tag-input {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  position: relative;
+  display: inline-block;
+  min-width: 0;
+  padding: 1px 4px;
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 12px;
+  line-height: 1.5715;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #d9d9d9;
+  border-radius: 2px;
+  transition: all 0.3s;
 }

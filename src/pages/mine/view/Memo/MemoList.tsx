@@ -1,9 +1,10 @@
 import React from 'react';
-import { debounce } from 'lodash';
+import { debounce } from 'lodash-es';
 
 import MineStoreContainer from '@/store/MineStoreContainer';
 import MemoCard from './MemoCard';
 
+import type { MemoProps } from '@/store/db';
 import MemoStyles from './Memo.module.less';
 
 const MemoList = () => {
@@ -12,7 +13,7 @@ const MemoList = () => {
   const [memosTop, setMemosTop] = React.useState(0);
   const memosRef = React.useRef<HTMLDivElement>(null);
 
-  const [listData, setListData] = React.useState<Record<string, any>[]>([]);
+  const [listData, setListData] = React.useState<MemoProps[]>([]);
 
   const listRef = React.useRef({
     curPage: 1,

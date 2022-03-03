@@ -1,7 +1,7 @@
 import React from 'react';
 import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
-import { isUndefined } from 'lodash';
+import { isUndefined } from 'lodash-es';
 
 import { db } from '@/store/db';
 import MineStoreContainer from '@/store/MineStoreContainer';

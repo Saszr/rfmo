@@ -1,7 +1,6 @@
 import React from 'react';
 import { MdOutlineMoreHoriz } from 'react-icons/md';
 import { Popover } from 'antd';
-import RichEditor from '@/pages/mine/components/RichEditor';
 import produce from 'immer';
 import dayjs from 'dayjs';
 
@@ -10,11 +9,16 @@ import { db } from '@/store/db';
 import Dialog from '@/components/Dialog';
 import { autoSync } from '@/utils/syncData';
 import ShareCard from './ShareCard';
+import Editor from './Editor';
+import { MarkdownPreview } from '@/components/MarkdownEditor';
+import Tag from '@/components/Tag';
 
+import type { TagItem } from './Editor';
+import type { MemoProps } from '@/store/db';
 import Styles from './Memo.module.less';
 
 export interface MemoCardProps {
-  item: Record<string, any>;
+  item: MemoProps;
   itemIndex: number;
 }
 
@@ -53,7 +57,6 @@ const MemoCard: React.FC<MemoCardProps> = ({ item, itemIndex }) => {
   ]);
 
   const [isEdit, setIsEdit] = React.useState(false);
-  const editorRef = React.useRef<Record<string, any>>(null);
 
   const [popoverVisible, setPopoverVisible] = React.useState(false);
 
@@ -67,13 +70,19 @@ const MemoCard: React.FC<MemoCardProps> = ({ item, itemIndex }) => {
     autoSync(setSyncLoading);
   };
 
-  const handleUpdateItem = async () => {
+  const handleUpdateItem = async ({
+    editorVal,
+    editorTags,
+  }: {
+    editorVal: string;
+    editorTags: TagItem[];
+  }) => {
     const { node_id } = item;
-    const value = editorRef.current!.value;
 
     await db.memo.update(node_id, {
-      body: value,
+      body: editorVal,
       updated_at: dayjs().format('YYYY-MM-DD HH:mm:ss'),
+      tags: editorTags,
     });
 
     const res = await db.memo.get(node_id);
@@ -107,31 +116,24 @@ const MemoCard: React.FC<MemoCardProps> = ({ item, itemIndex }) => {
     <div className={Styles.memo}>
       <div className={Styles.card}>
         {isEdit ? (
-          <RichEditor
-            ref={editorRef}
+          <Editor
             initDoc={item.body}
-            disableSubmit={true}
-            extraBtn={
-              <>
-                <button
-                  type="button"
-                  style={{ marginRight: '6px' }}
-                  onClick={() => {
-                    setIsEdit(false);
-                  }}
-                >
-                  取消
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    handleUpdateItem();
-                  }}
-                >
-                  更新
-                </button>
-              </>
-            }
+            initTags={item.tags}
+            extraBtnArr={{
+              update: (res) => {
+                setPopoverVisible(false);
+                handleUpdateItem(
+                  res as {
+                    editorVal: string;
+                    editorTags: TagItem[];
+                  },
+                );
+              },
+              cancel: () => {
+                setPopoverVisible(false);
+                setIsEdit(false);
+              },
+            }}
           />
         ) : (
           <>
@@ -153,9 +155,16 @@ const MemoCard: React.FC<MemoCardProps> = ({ item, itemIndex }) => {
                 </Popover>
               </div>
             </div>
-            <div className={Styles.content}>
-              <div dangerouslySetInnerHTML={{ __html: item.body }} />
-            </div>
+            <MarkdownPreview className={Styles.body} doc={item.body} />
+
+            {item.tags.length > 0 && (
+              <div className={Styles.footer}>
+                {item.tags.map((tagItem) => {
+                  // eslint-disable-next-line react/no-array-index-key
+                  return <Tag key={tagItem.key}>{tagItem.value}</Tag>;
+                })}
+              </div>
+            )}
           </>
         )}
       </div>
