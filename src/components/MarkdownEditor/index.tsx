@@ -50,15 +50,12 @@ const MarkdownEditor = (props: EditorProps) => {
   const { initDoc, extraBtn, onChange, extraArea } = props;
 
   const [doc, setDoc] = React.useState('');
-  // const [textareaInitHeight, setTextareaInitHeight] = React.useState('auto');
   const [editorTextareaRef, setEditorTextareaRef] = React.useState<HTMLTextAreaElement | null>(
     null,
   );
 
   const handleEditorChange = () => {
     if (editorTextareaRef) {
-      editorTextareaRef.style.height = 'auto';
-      editorTextareaRef.style.height = editorTextareaRef.scrollHeight + 'px';
       if (onChange) onChange(editorTextareaRef.value);
     }
   };
@@ -68,6 +65,13 @@ const MarkdownEditor = (props: EditorProps) => {
       setDoc(initDoc);
     }
   }, [initDoc]);
+
+  React.useEffect(() => {
+    if (editorTextareaRef) {
+      editorTextareaRef.style.height = 'auto';
+      editorTextareaRef.style.height = editorTextareaRef.scrollHeight + 'px';
+    }
+  }, [doc]);
 
   React.useEffect(() => {
     if (editorTextareaRef) {
