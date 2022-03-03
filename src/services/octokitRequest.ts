@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import baseRequest from './baseRequest';
 import type { RequestOptions as octokitRequestOptions } from '@octokit/types';
 
@@ -17,9 +16,7 @@ const octokitRequest: RequestMethod = (options) => {
 
     return baseRequest({ ...options, headers: { ...baseHeaders, ...options.headers } });
   } else {
-    console.group();
-    console.log('请设置 access_token ');
-    console.groupEnd();
+    throw '请设置 access_token';
   }
 };
 
