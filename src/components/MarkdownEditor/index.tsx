@@ -28,7 +28,7 @@ const MarkdownPreview = ({ doc, className }: { doc: string; className?: string }
   const [htmlString, setHtmlString] = React.useState('');
 
   React.useEffect(() => {
-    if (doc) setHtmlString(md.render(doc));
+    if (typeof doc !== 'undefined') setHtmlString(md.render(doc));
   }, [doc]);
 
   return (
@@ -69,16 +69,9 @@ const MarkdownEditor = (props: EditorProps) => {
   React.useEffect(() => {
     if (editorTextareaRef) {
       editorTextareaRef.style.height = 'auto';
-      editorTextareaRef.style.height = editorTextareaRef.scrollHeight + 'px';
+      editorTextareaRef.style.height = `${editorTextareaRef.scrollHeight}px`;
     }
-  }, [doc]);
-
-  React.useEffect(() => {
-    if (editorTextareaRef) {
-      editorTextareaRef.style.height = 'auto';
-      editorTextareaRef.style.height = editorTextareaRef.scrollHeight + 'px';
-    }
-  }, [editorTextareaRef]);
+  }, [editorTextareaRef, doc]);
 
   return (
     <div className={Styles.container}>
@@ -89,7 +82,7 @@ const MarkdownEditor = (props: EditorProps) => {
               ref={(ref) => setEditorTextareaRef(ref)}
               className={Styles.editor}
               onChange={() => handleEditorChange()}
-              value={doc}
+              defaultValue={doc}
             />
           </div>
         </Tabs.TabPane>
