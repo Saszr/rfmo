@@ -68,6 +68,7 @@ const MarkdownEditor = (props: EditorProps) => {
 
   React.useEffect(() => {
     if (editorTextareaRef) {
+      editorTextareaRef.value = doc;
       editorTextareaRef.style.height = 'auto';
       editorTextareaRef.style.height = `${editorTextareaRef.scrollHeight}px`;
     }
@@ -82,7 +83,6 @@ const MarkdownEditor = (props: EditorProps) => {
               ref={(ref) => setEditorTextareaRef(ref)}
               className={Styles.editor}
               onChange={() => handleEditorChange()}
-              defaultValue={doc}
             />
           </div>
         </Tabs.TabPane>
