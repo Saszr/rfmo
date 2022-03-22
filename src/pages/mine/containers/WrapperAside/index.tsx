@@ -1,5 +1,4 @@
 import React from 'react';
-import { useSize } from 'ahooks';
 
 import MineStoreContainer from '@/store/MineStoreContainer';
 import Drawer from '@/components/Drawer';
@@ -23,18 +22,21 @@ const AsideDrawer = () => {
 
   const [normalAsideWidth, setNormalAsideWidth] = React.useState('300px');
 
-  const bodySize = useSize(document.querySelector('body'));
+  const onResize = React.useCallback(() => {
+    const pageWidth = document.documentElement.clientWidth;
+    if (pageWidth <= 375) {
+      setNormalAsideWidth('80%');
+    } else {
+      setNormalAsideWidth('300px');
+    }
+  }, []);
 
   React.useEffect(() => {
-    if (bodySize) {
-      const { width: bodyWidth } = bodySize;
-      if (bodyWidth <= 375) {
-        setNormalAsideWidth('80%');
-      } else {
-        setNormalAsideWidth('300px');
-      }
-    }
-  }, [bodySize]);
+    window.addEventListener('resize', onResize);
+    return () => {
+      window.removeEventListener('resize', onResize);
+    };
+  }, []);
 
   return (
     <Drawer

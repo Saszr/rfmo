@@ -1,0 +1,55 @@
+.flex(@direction, @justify, @align) {
+  display: flex;
+  flex-direction: @direction;
+  justify-content: @justify;
+  align-items: @align;
+}
+
+.drawer-root {
+  > .drawer-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #00000073;
+
+    width: 100%;
+    height: 0;
+    opacity: 0;
+
+    transition: opacity 0.3s linear, height 0s ease 0.3s;
+  }
+
+  > .drawer-container {
+    transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1),
+      box-shadow 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+
+    position: absolute;
+    top: 0;
+    bottom: 0;
+
+    background-color: #fafafa;
+    box-sizing: border-box;
+    overflow: hidden;
+    height: 100vh;
+  }
+}
+
+.drawer-root-open {
+  > .drawer-mask {
+    height: 100%;
+    opacity: 1;
+    transition: none;
+    animation: DrawerFadeIn 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    pointer-events: auto;
+  }
+}
+
+@keyframes DrawerFadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
