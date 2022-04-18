@@ -55,7 +55,7 @@ const HeatGridChart: React.FC<HeatGridStatProps> = (props) => {
 
   return (
     <>
-      <div className={Styles.heatGrid}>
+      <div className={Styles['heat-grid']}>
         {heatGridDayArr.map((week, x) => {
           return (
             // eslint-disable-next-line react/no-array-index-key
@@ -71,11 +71,11 @@ const HeatGridChart: React.FC<HeatGridStatProps> = (props) => {
 
                 const memoDepth =
                   curMemoCount > 0 && curMemoCount < 5
-                    ? Styles.lightGreen
+                    ? Styles['light-green']
                     : curMemoCount >= 5 && curMemoCount < 10
                     ? Styles.green
                     : curMemoCount >= 10
-                    ? Styles.darkGreen
+                    ? Styles['dark-green']
                     : '';
 
                 return (
@@ -93,7 +93,7 @@ const HeatGridChart: React.FC<HeatGridStatProps> = (props) => {
           );
         })}
       </div>
-      <div className={classNames(Styles.heatGrid, Styles.monthBox)}>
+      <div className={classNames(Styles['heat-grid'], Styles['month-box'])}>
         {heatGridMonthArr.map((month, z) => {
           return (
             // eslint-disable-next-line react/no-array-index-key

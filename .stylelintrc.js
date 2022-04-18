@@ -1,5 +1,5 @@
-const fiberLint = require('fiber-lint');
-
 module.exports = {
-  ...fiberLint.stylelint,
+  customSyntax: 'postcss-less',
+  extends: [require.resolve('fiber-lint/dist/stylelintrc')],
+  rules: {},
 };

@@ -24,22 +24,20 @@
     > .dialog-container {
       background-color: #fff;
       box-sizing: border-box;
-      // padding: 16px;
       border-radius: 8px;
       overflow: hidden;
-
       position: relative;
       top: 100px;
       max-width: calc(100vw - 32px);
       margin: 0 auto;
-
       width: 520px;
 
       > .dialog-header-container {
         .flex(row, space-between, center);
+
         width: 100%;
         margin-bottom: 16px;
-        padding: 16px 16px 0 16px;
+        padding: 16px 16px 0;
 
         > .icon-btn {
           height: 20px;
@@ -54,11 +52,13 @@
 
       > .dialog-content-container {
         .flex(column, flex-start, flex-start);
+
         width: 100%;
       }
 
       > .dialog-footer-container {
         .flex(row, flex-end, center);
+
         width: 100%;
         margin-top: 16px;
       }
